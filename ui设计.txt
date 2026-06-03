@@ -1,0 +1,234 @@
+配色体系
+
+主色：
+
+奶油白 #F8F6F3
+牛油果绿 #A9C95A
+薄荷绿 #D7E8D1
+浅橙色 #F8B66B
+淡紫色 #8A7CF4
+
+辅助色：
+
+浅灰 #EDEDED
+深灰 #555555
+
+首页
+Design a modern mobile mini-program UI for an AI nutrition assistant called “随食一拍”.
+
+Style:
+Apple-inspired Soft UI, neumorphism, minimalism, healthy food app design, Behance quality, Dribbble featured shot, premium mobile product design.
+
+Color palette:
+cream white background, avocado green accent, soft mint green, pastel orange, pastel purple.
+
+Layout:
+top greeting section,
+daily nutrition score card,
+large circular nutrition progress ring,
+protein, carbohydrate, fat tracking,
+cute food illustrations,
+floating camera capture button in the center,
+rounded cards,
+subtle shadows,
+clean typography,
+airy spacing,
+premium user experience.
+
+Design language:
+soft rounded corners,
+glass-like cards,
+minimal icons,
+high-end wellness startup aesthetic,
+cute but professional.
+
+No dark colors.
+No clutter.
+No heavy gradients.
+
+Figma showcase quality.
+Award-winning UI design.
+
+
+
+拍照识别页
+
+
+Design a food recognition camera screen for an AI nutrition app called “随食一拍”.
+
+Camera preview full screen.
+
+Top:
+minimal navigation bar.
+
+Center:
+AI scanning frame with rounded corners.
+
+Scanning animation:
+green scanning line,
+floating particles,
+AI recognition effect.
+
+Bottom:
+large rounded shutter button,
+soft neumorphism style.
+
+After capture:
+show detected foods as floating cards.
+
+Food examples:
+rice,
+chicken breast,
+broccoli,
+egg.
+
+Display:
+calories,
+protein,
+fat,
+carbohydrates.
+
+Premium Apple Health style.
+Soft shadows.
+Cream white and green color scheme.
+Modern nutrition app.
+Dribbble quality.
+
+营养分析页
+Design a nutrition analysis dashboard for a mobile health app.
+
+Style:
+minimal, neumorphism, modern healthcare UI.
+
+Layout:
+large circular nutrition chart in center.
+
+Show:
+
+Calories
+
+Protein
+
+Fat
+
+Carbohydrates
+
+Dietary Fiber
+
+Vitamin
+
+Each metric displayed in colorful rounded cards.
+
+Use pastel purple,
+mint green,
+soft orange.
+
+Food illustration on top.
+
+Nutrition score:
+92/100
+
+AI health suggestion card below.
+
+Beautiful spacing.
+Rounded corners.
+Soft shadows.
+Clean typography.
+
+Behance award-winning style.
+
+个人中心
+Design a profile page for an AI food tracking mini-program.
+
+Style:
+Apple Health + Calm App + Dribbble Wellness Design.
+
+Sections:
+
+Daily streak
+
+Achievements
+
+Food collection gallery
+
+Weekly nutrition report
+
+AI health insights
+
+Weight trend chart
+
+Use neumorphism cards,
+cream background,
+green accent colors,
+cute food mascot.
+
+Very clean layout.
+High-end startup product style.
+给Claude/Mimo的终极提示词
+
+如果你要一次生成完整产品，我建议直接复制下面这段：
+
+Create a complete WeChat Mini Program UI design named “随食一拍”.
+
+Product:
+AI food recognition and nutrition tracking assistant.
+
+Core function:
+Users take photos of meals.
+AI recognizes food automatically.
+Calculate calories, protein, carbohydrates, fat, vitamins and dietary fiber.
+Generate daily nutrition reports and health recommendations.
+
+Design style:
+
+100% inspired by premium Dribbble and Behance nutrition app designs.
+
+Neumorphism.
+
+Soft UI.
+
+Apple Human Interface Guidelines.
+
+Cream white background.
+
+Pastel green, mint green, pastel orange and pastel purple accents.
+
+Large rounded corners.
+
+Soft floating shadows.
+
+Cute food illustrations.
+
+Minimal icons.
+
+Premium wellness startup aesthetics.
+
+Figma showcase quality.
+
+Pages:
+
+1. Home dashboard
+2. AI camera recognition page
+3. Food detail page
+4. Nutrition analysis dashboard
+5. Weekly report page
+6. Achievement system
+7. User profile page
+
+Visual requirements:
+
+extremely clean layout
+
+high-end product feeling
+
+professional nutrition platform
+
+cute but not childish
+
+dribbble top shot quality
+
+behance featured project quality
+
+pixel-perfect mobile interface
+
+2025 modern SaaS mobile design language

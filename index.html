@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>随食一拍 · AI营养助手</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Top Nav -->
+<div class="nav">
+  <div class="nav-brand">
+    <div class="nav-logo">🍽</div>
+    <div>
+      <div class="nav-title">随食一拍</div>
+      <div class="nav-subtitle" id="navStatus">AI营养助手</div>
+    </div>
+  </div>
+  <button id="darkToggle" onclick="toggleDark()" style="background:none;border:none;font-size:20px;cursor:pointer;padding:6px 8px;border-radius:8px;" title="切换深色模式">🌙</button>
+</div>
+<!-- ==================== PAGE 1: 拍照识别 ==================== -->
+<div class="page active" id="page-camera">
+
+  <!-- API Config (collapsed by default if configured) -->
+  <div class="card">
+    <div class="collapse-toggle" onclick="toggleConfig()">
+      <div class="card-header" style="margin-bottom:0; flex:1;">
+        <div class="card-icon blue">⚙️</div>
+        <div class="card-title">API 配置</div>
+      </div>
+      <span class="arrow" id="configArrow">▶</span>
+    </div>
+    <div class="collapse-body" id="configPanel">
+      <div class="collapse-body-inner">
+        <div class="config-group">
+          <label class="config-label">API Base URL</label>
+          <input type="text" class="config-input" id="apiBase" placeholder="https://aiping.cn/api/v1" autocomplete="off">
+          <div class="preset-btns">
+            <button class="preset-btn" onclick="setPreset('aiping')">aiping.cn</button>
+            <button class="preset-btn" onclick="setPreset('openai')">OpenAI</button>
+            <button class="preset-btn" onclick="setPreset('openrouter')">OpenRouter</button>
+          </div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">API Key</label>
+          <input type="password" class="config-input" id="apiKey" placeholder="QC..." autocomplete="off">
+          <div class="config-status" id="keyStatus"><span class="dot off"></span> 未配置</div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">模型名称 (视觉模型)</label>
+          <input type="text" class="config-input" id="modelName" placeholder="Qwen3-VL-30B-A3B-Instruct" autocomplete="off">
+          <div class="preset-btns">
+            <button class="preset-btn" onclick="setModel('Qwen3-VL-30B-A3B-Instruct')">Qwen3-VL-30B</button>
+            <button class="preset-btn" onclick="setModel('Qwen2.5-VL-72B-Instruct')">Qwen2.5-VL-72B</button>
+            <button class="preset-btn" onclick="setModel('GLM-4.6V')">GLM-4.6V</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Zone -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon green">📸</div><div class="card-title">拍照识别</div></div>
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+      <div class="upload-placeholder" id="placeholder">
+        <div class="icon-circle">📷</div>
+        <div class="text">点击拍照或选择图片</div>
+      </div>
+      <img id="previewImg" style="display:none" alt="食物图片">
+    </div>
+    <input type="file" id="fileInput" accept="image/*" capture="environment" onchange="handleFile(this)">
+
+    <!-- Meal type selector -->
+    <div class="meal-type-row" id="mealTypeRow">
+      <div class="meal-type-btn sel" onclick="selectMealType('breakfast')">🌅 早餐</div>
+      <div class="meal-type-btn" onclick="selectMealType('lunch')">☀️ 午餐</div>
+      <div class="meal-type-btn" onclick="selectMealType('dinner')">🌙 晚餐</div>
+      <div class="meal-type-btn" onclick="selectMealType('snack')">🍪 加餐</div>
+    </div>
+
+    <div class="upload-actions">
+      <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">🖼 相册</button>
+      <button class="btn btn-primary" id="recognizeBtn" onclick="recognize()" disabled>识别食物</button>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading-block" id="loading">
+    <div class="loader"><div class="loader-ring"></div></div>
+    <div class="loading-text">AI 正在识别食物…</div>
+    <div class="loading-sub" id="loadingModel"></div>
+  </div>
+
+  <!-- Results + Save -->
+  <div class="results-block" id="results"></div>
+</div>
+
+<!-- ==================== PAGE 2: 今日记录 ==================== -->
+<div class="page" id="page-record">
+  <div style="padding-top:8px;"></div>
+  <div class="day-header">
+    <button class="day-nav" onclick="changeDay(-1)">◀ 昨天</button>
+    <b id="recordDate">今天</b>
+    <button class="day-nav" onclick="changeDay(1)">明天 ▶</button>
+    <button class="btn btn-small btn-secondary" onclick="changeDay(0)">今天</button>
+  </div>
+
+  <!-- Daily summary stats -->
+  <div class="stat-row" id="dailyStats"></div>
+
+  <!-- Pie chart -->
+  <div class="card" id="chartCard" style="display:none">
+    <div class="card-header"><div class="card-icon purple">📊</div><div class="card-title">今日营养结构</div></div>
+    <div class="chart-wrap"><canvas id="nutritionChart"></canvas></div>
+  </div>
+
+  <!-- AI Daily Report -->
+  <div class="card" style="text-align:center;">
+    <button class="btn btn-primary" onclick="generateDailyReport()" id="reportBtn">🤖 AI 生成每日报告</button>
+    <div style="display:flex;gap:6px;margin-top:8px;">
+      <button class="btn btn-secondary btn-small" onclick="generateWeekReport()" style="flex:1;">📊 周报</button>
+      <button class="btn btn-secondary btn-small" onclick="generateMonthReport()" style="flex:1;">📅 月报</button>
+    </div>
+    <div id="reportArea" style="margin-top:10px;"></div>
+  </div>
+
+  <!-- Meals list -->
+  <div id="mealsList"></div>
+</div>
+
+<!-- ==================== PAGE 3: AI助手 ==================== -->
+<div class="page" id="page-assistant">
+  <div style="padding-top:8px;"></div>
+
+  <!-- Dashboard stats -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon purple">📊</div><div class="card-title">本周营养概览</div></div>
+    <div class="dash-grid" id="weeklyDash"></div>
+    <button class="dash-toggle-btn" id="dashToggleBtn" onclick="toggleDashDetail()">展开详细分析 ▼</button>
+    <div class="dash-detail-panel" id="dashDetailPanel">
+      <div class="dash-detail-panel-inner" id="detailedDash"></div>
+    </div>
+  </div>
+
+  <!-- AI Active Agent (模块八) -->
+  <div class="card" id="agentCard">
+    <div class="card-header"><div class="card-icon orange">🤖</div><div class="card-title">AI主动监测</div></div>
+    <div id="healthAgentAlerts"></div>
+  </div>
+
+  <!-- Trend Chart -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon green">📈</div><div class="card-title">历史趋势</div></div>
+    <div class="trend-tabs">
+      <button class="trend-tab sel" onclick="switchTrend('cal')">热量</button>
+      <button class="trend-tab" onclick="switchTrend('weight')">体重</button>
+      <button class="trend-tab" onclick="switchTrend('macro')">营养素</button>
+    </div>
+    <div class="trend-chart-wrap"><canvas id="trendChart"></canvas></div>
+  </div>
+
+  <!-- Food Recommendation (模块九) -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon green">🍽</div><div class="card-title">AI 今天吃什么</div></div>
+    <div class="reco-meal-row" id="recoMealRow">
+      <button class="reco-meal-btn sel" data-meal="breakfast" onclick="selectRecoMeal('breakfast')">🌅 早餐</button>
+      <button class="reco-meal-btn" data-meal="lunch" onclick="selectRecoMeal('lunch')">☀️ 午餐</button>
+      <button class="reco-meal-btn" data-meal="dinner" onclick="selectRecoMeal('dinner')">🌙 晚餐</button>
+      <button class="reco-meal-btn" data-meal="snack" onclick="selectRecoMeal('snack')">🍪 加餐</button>
+    </div>
+    <button class="btn btn-primary" id="recoBtn" onclick="generateMealRecommendation()" style="width:100%;">🤖 AI智能推荐</button>
+    <div id="recoResults" style="margin-top:10px;"></div>
+  </div>
+
+  <!-- AI Chat -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon blue">💬</div><div class="card-title">AI营养师</div></div>
+    <div class="chat-wrap">
+      <div class="chat-msgs" id="chatMsgs">
+        <div class="chat-msg ai">
+          <div class="avatar">🤖</div>
+          <div class="bubble">你好！我是你的专属AI营养师。我了解你的健康档案和饮食记录，可以给你个性化建议。<br><br>你可以问我：</div>
+        </div>
+        <div class="chat-hint" id="chatHints">
+          <span onclick="askHint('我今天还能喝奶茶吗')">我今天还能喝奶茶吗</span>
+          <span onclick="askHint('晚上吃烧烤会胖吗')">晚上吃烧烤会胖吗</span>
+          <span onclick="askHint('为什么体重不下降')">为什么体重不下降</span>
+          <span onclick="askHint('增肌应该吃什么')">增肌应该吃什么</span>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="问AI营养师..." onkeydown="if(event.key==='Enter')askAI()">
+        <button onclick="askAI()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 我的 ==================== -->
+<div class="page" id="page-profile">
+  <div style="padding-top:8px;"></div>
+
+  <!-- Health Profile -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon blue">👤</div><div class="card-title">健康档案</div></div>
+    <div class="form-row">
+      <div class="config-group">
+        <label class="config-label">性别</label>
+        <select class="form-select" id="pGender" onchange="saveProfile()">
+          <option value="male">男</option><option value="female">女</option>
+        </select>
+      </div>
+      <div class="config-group">
+        <label class="config-label">年龄</label>
+        <input type="number" class="config-input" id="pAge" placeholder="25" min="10" max="120" onchange="saveProfile()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="config-group">
+        <label class="config-label">身高 (cm)</label>
+        <input type="number" class="config-input" id="pHeight" placeholder="170" min="100" max="250" onchange="saveProfile()">
+      </div>
+      <div class="config-group">
+        <label class="config-label">体重 (kg)</label>
+        <input type="number" class="config-input" id="pWeight" placeholder="65" min="30" max="200" step="0.1" onchange="saveProfile()">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="config-group">
+        <label class="config-label">目标体重 (kg)</label>
+        <input type="number" class="config-input" id="pTargetWeight" placeholder="60" min="30" max="200" step="0.1" onchange="saveProfile()">
+      </div>
+      <div class="config-group">
+        <label class="config-label">活动等级</label>
+        <select class="form-select" id="pActivity" onchange="saveProfile()">
+          <option value="1.2">久坐 (基本不运动)</option>
+          <option value="1.375">轻度 (每周1-2次)</option>
+          <option value="1.55">中度 (每周3-5次)</option>
+          <option value="1.725">高度 (每周6-7次)</option>
+          <option value="1.9">运动员 (每天高强度)</option>
+        </select>
+      </div>
+    </div>
+    <div class="config-group" style="margin-top:4px;">
+      <label class="config-label">饮食偏好 / 忌口 (逗号分隔)</label>
+      <input type="text" class="config-input" id="pPreferences" placeholder="例如: 不吃辣, 不吃海鲜, 偏好清淡" onchange="saveProfile()">
+    </div>
+  </div>
+
+  <!-- Calculated Results -->
+  <div class="info-card" id="healthCalc">
+    <div style="font-size:12px;color:var(--text-secondary);margin-bottom:4px;">📐 健康数据计算</div>
+    <div class="info-row">
+      <div class="info-item"><div class="val" id="calcBMI">--</div><div class="lbl">BMI</div></div>
+      <div class="info-item"><div class="val" id="calcBMR">--</div><div class="lbl">BMR (千卡)</div></div>
+      <div class="info-item"><div class="val" id="calcTDEE">--</div><div class="lbl">TDEE (千卡)</div></div>
+    </div>
+    <div class="info-row" style="margin-top:8px;">
+      <div class="info-item"><div class="val" id="calcTarget">--</div><div class="lbl">每日目标 (千卡)</div></div>
+      <div class="info-item"><div class="val" id="calcProtein">--</div><div class="lbl">蛋白质 (g)</div></div>
+      <div class="info-item"><div class="val" id="calcBMIStatus">--</div><div class="lbl">BMI评价</div></div>
+    </div>
+  </div>
+
+  <!-- Weight Log -->
+  <div class="card">
+    <div class="card-header"><div class="card-icon orange">⚖️</div><div class="card-title">体重记录</div></div>
+    <div class="weight-log-row">
+      <input type="number" class="config-input" id="weightInput" placeholder="今日体重 (kg)" step="0.1" style="flex:1;">
+      <button class="btn btn-primary btn-small" onclick="logWeight()" style="flex:0 0 auto;">记录</button>
+    </div>
+    <div class="weight-chart-wrap"><canvas id="weightChart"></canvas></div>
+    <div style="font-size:11px;color:var(--text-secondary);margin-top:4px;" id="weightHistory"></div>
+  </div>
+
+  <!-- Digital Health Twin -->
+  <div class="twin-card" id="twinCard">
+    <div class="twin-title">🔮 数字健康孪生预测</div>
+    <div style="font-size:12px;opacity:0.7;" id="twinSummary">需要至少7天饮食数据</div>
+    <div class="twin-big" id="twinBig">--<span></span></div>
+    <div class="twin-pred" id="twinPred"></div>
+    <div class="twin-bar" id="twinBarWrap" style="display:none;"><div class="twin-bar-fill" id="twinBar" style="width:0%"></div></div>
+    <div style="font-size:11px;opacity:0.6;margin-top:6px;" id="twinNote"></div>
+  </div>
+
+  <!-- Health Risk Warnings (模块十一) -->
+  <div class="card" id="riskCard">
+    <div class="card-header"><div class="card-icon orange">🏥</div><div class="card-title">健康风险预警</div></div>
+    <div id="riskWarnings"></div>
+  </div>
+
+  <!-- Game Growth System (模块十二) -->
+  <div class="card" id="gameCard">
+    <div class="card-header"><div class="card-icon green">🎮</div><div class="card-title">健康成长</div></div>
+    <div id="gameCardInner"></div>
+  </div>
+</div>
+
+<!-- ==================== Bottom Tab Bar ==================== -->
+<div class="tab-bar">
+  <div class="tab-item active" onclick="switchTab('camera')">
+    <span class="tab-icon">📸</span>拍照
+  </div>
+  <div class="tab-item" onclick="switchTab('record')">
+    <span class="tab-icon">📊</span>记录
+  </div>
+  <div class="tab-item" onclick="switchTab('assistant')">
+    <span class="tab-icon">🤖</span>助手
+  </div>
+  <div class="tab-item" onclick="switchTab('profile')">
+    <span class="tab-icon">👤</span>我的
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+
+<!-- Main App JS -->
+<script src="testdata-loader.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
