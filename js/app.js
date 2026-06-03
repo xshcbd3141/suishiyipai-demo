@@ -1,3 +1,19 @@
+// ===== Chart.js 主题色适配 =====
+function getChartTheme() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const style = getComputedStyle(document.documentElement);
+  return {
+    protein: style.getPropertyValue('--avocado').trim() || '#A9C95A',
+    fat: style.getPropertyValue('--soft-orange').trim() || '#F8B66B',
+    carb: style.getPropertyValue('--lavender').trim() || '#8A7CF4',
+    cal: style.getPropertyValue('--avocado').trim() || '#A9C95A',
+    weight: style.getPropertyValue('--lavender').trim() || '#8A7CF4',
+    textColor: isDark ? '#98989D' : '#8E8E93',
+    gridColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
+    bgTransparent: isDark ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.02)',
+  };
+}
+
 // ===== 全局状态 =====
 let selectedFile = null;
 let currentMealType = 'lunch';
@@ -424,7 +440,7 @@ function addFoodItem() {
   div.innerHTML = `<div class="food-emoji">${getFoodEmoji(name, '')}</div>
     <div class="food-body">
       <div class="food-name" style="display:flex;align-items:center;gap:6px;">
-        <span contenteditable="true" oninput="onFoodEdit()" data-food-idx="${idx}" data-field="name" style="outline:none;border-bottom:1px dashed transparent;padding:1px 2px;min-width:60px;" onfocus="this.style.borderBottomColor='var(--green)'" onblur="this.style.borderBottomColor='transparent'">${name}</span>
+        <span contenteditable="true" oninput="onFoodEdit()" data-food-idx="${idx}" data-field="name" style="outline:none;border-bottom:1px dashed transparent;padding:1px 2px;min-width:60px;" onfocus="this.style.borderBottomColor='var(--color-primary)'" onblur="this.style.borderBottomColor='transparent'">${name}</span>
       </div>
       <div class="food-meta" style="display:flex;align-items:center;gap:6px;">
         <input class="food-weight-input" type="number" value="${weight}" min="5" max="5000" step="5" data-food-idx="${idx}" data-field="weight" oninput="onFoodEdit()"> g
@@ -567,13 +583,14 @@ function changeDay(offset) {
 function renderNutritionChart(pro, fat, carb) {
   const ctx = $('nutritionChart').getContext('2d');
   if (nutritionChart) nutritionChart.destroy();
+  const theme = getChartTheme();
   nutritionChart = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: ['蛋白质', '脂肪', '碳水'],
       datasets: [{
         data: [pro * 4, fat * 9, carb * 4],
-        backgroundColor: ['#2e7d32', '#c62828', '#f9a825'],
+        backgroundColor: [theme.protein, theme.fat, theme.carb],
         borderWidth: 2, borderColor: '#fff',
       }]
     },
@@ -669,6 +686,7 @@ function logWeight() {
 }
 
 function renderWeightChart() {
+  const theme = getChartTheme();
   const log = JSON.parse(localStorage.getItem(SK.weightLog) || '[]');
   if (log.length < 2) { $('weightHistory').textContent = log.length === 1 ? '最新: ' + log[0].weight + 'kg (' + log[0].date + ')' : '暂无体重记录'; return; }
   $('weightHistory').textContent = '最新: ' + log[log.length-1].weight + 'kg · 共' + log.length + '条记录';
@@ -683,7 +701,7 @@ function renderWeightChart() {
       datasets: [{
         label: '体重 (kg)',
         data: log.map(e => e.weight),
-        borderColor: '#07c160', backgroundColor: 'rgba(7,193,96,0.1)',
+        borderColor: theme.weight, backgroundColor: theme.bgTransparent,
         fill: true, tension: 0.3, pointRadius: 3,
       }]
     },
@@ -940,6 +958,7 @@ function switchTrend(type) {
 }
 
 function renderTrendChart() {
+  const theme = getChartTheme();
   const ctx = document.getElementById('trendChart').getContext('2d');
   if (trendChart) trendChart.destroy();
 
@@ -966,8 +985,8 @@ function renderTrendChart() {
         datasets: [{
           label: '热量 (千卡)',
           data: calData,
-          backgroundColor: calData.map(v => v === null ? 'transparent' : (v > 2200 ? 'rgba(231,76,60,0.6)' : 'rgba(7,193,96,0.5)')),
-          borderColor: '#07c160', borderWidth: 1,
+          backgroundColor: calData.map(v => v === null ? 'transparent' : (v > 2200 ? 'rgba(224,112,96,0.5)' : 'rgba(169,201,90,0.4)')),
+          borderColor: theme.cal, borderWidth: 1,
         }]
       },
       options: { responsive: true, maintainAspectRatio: false,
@@ -986,7 +1005,7 @@ function renderTrendChart() {
         datasets: [{
           label: '体重 (kg)',
           data: wtData,
-          borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)',
+          borderColor: theme.weight, backgroundColor: theme.bgTransparent,
           fill: true, tension: 0.3, pointRadius: 2, spanGaps: false,
         }]
       },
@@ -1004,9 +1023,9 @@ function renderTrendChart() {
       data: {
         labels,
         datasets: [
-          { label: '蛋白(g)', data: proData, borderColor: '#2e7d32', tension: 0.3, pointRadius: 1, spanGaps: true },
-          { label: '脂肪(g)', data: fatData, borderColor: '#c62828', tension: 0.3, pointRadius: 1, spanGaps: true },
-          { label: '碳水(g)', data: carbData, borderColor: '#f9a825', tension: 0.3, pointRadius: 1, spanGaps: true },
+          { label: '蛋白(g)', data: proData, borderColor: theme.protein, tension: 0.3, pointRadius: 1, spanGaps: true },
+          { label: '脂肪(g)', data: fatData, borderColor: theme.fat, tension: 0.3, pointRadius: 1, spanGaps: true },
+          { label: '碳水(g)', data: carbData, borderColor: theme.carb, tension: 0.3, pointRadius: 1, spanGaps: true },
         ]
       },
       options: { responsive: true, maintainAspectRatio: false,
@@ -1108,18 +1127,19 @@ async function askAI() {
   msgs.scrollTop = msgs.scrollHeight;
 }
 
-// ===== Nav status =====
+// ===== Nav status (写入页面subtitle) =====
 function updateNavStatus() {
   const date = todayStr();
   const meals = JSON.parse(localStorage.getItem(SK.meals) || '{}');
   const dayMeals = meals[date] || [];
   const totalCal = dayMeals.reduce((s, m) => s + m.nutrition.cal, 0);
   const profile = getProfile();
+  const brandSub = document.querySelector('.camera-brand .brand-sub');
   if (profile) {
     const pct = profile.dailyTarget > 0 ? Math.round(totalCal / profile.dailyTarget * 100) : 0;
-    $('navStatus').textContent = '🔥 ' + totalCal + '/' + profile.dailyTarget + '千卡 (' + pct + '%)';
+    if (brandSub) brandSub.textContent = '🔥 ' + totalCal + '/' + profile.dailyTarget + '千卡 (' + pct + '%)';
   } else {
-    $('navStatus').textContent = dayMeals.length > 0 ? '🔥 今日 ' + totalCal + '千卡' : 'AI营养助手';
+    if (brandSub) brandSub.textContent = dayMeals.length > 0 ? '🔥 今日 ' + totalCal + '千卡' : '一拍知营养，健康伴一生';
   }
 }
 
@@ -1914,13 +1934,15 @@ function generateMonthReport() { generatePeriodReport('month'); }
   if (!$('apiBase').value) $('apiBase').value = 'https://aiping.cn/api/v1';
   if (!$('modelName').value) $('modelName').value = 'Qwen3-VL-30B-A3B-Instruct';
   updateStatus();
-  if (!key || !base) toggleConfig(true);
   updateNavStatus();
   // 暗色模式初始化
   const saved = localStorage.getItem('ssyp_dark');
+  const darkToggle = document.getElementById('darkToggle');
   if (saved === '1' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     document.documentElement.classList.add('dark');
-    $('darkToggle').textContent = '☀️';
+    if (darkToggle) darkToggle.textContent = '☀️';
+  } else {
+    if (darkToggle) darkToggle.textContent = '🌙';
   }
 })();
 
@@ -1930,7 +1952,25 @@ function toggleDark() {
   html.classList.toggle('dark');
   const isDark = html.classList.contains('dark');
   localStorage.setItem('ssyp_dark', isDark ? '1' : '0');
-  $('darkToggle').textContent = isDark ? '☀️' : '🌙';
+  const dt = document.getElementById('darkToggle');
+  if (dt) dt.textContent = isDark ? '☀️' : '🌙';
+  // 更新状态栏颜色
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', isDark ? '#2A2320' : '#FFF8F0');
+  // 重绘图表以适配暗色模式
+  if (nutritionChart && $('chartCard').style.display !== 'none') {
+    const pageActive = document.querySelector('.page.active');
+    if (pageActive && pageActive.id === 'page-record') {
+      const meals = JSON.parse(localStorage.getItem(SK.meals) || '{}');
+      const date = dateStr(currentDayOffset);
+      const dayMeals = meals[date] || [];
+      let tp = 0, tf = 0, tc = 0;
+      dayMeals.forEach(m => { tp += m.nutrition.pro; tf += m.nutrition.fat; tc += m.nutrition.carb; });
+      if (dayMeals.length > 0) renderNutritionChart(tp, tf, tc);
+    }
+  }
+  if (trendChart) renderTrendChart();
+  if (weightChart) renderWeightChart();
 }
 
 ['apiBase','apiKey','modelName'].forEach(id => { $(id).addEventListener('input', () => { saveConfig(); updateStatus(); }); });

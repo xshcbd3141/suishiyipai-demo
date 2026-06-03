@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卡皮巴拉510-13卡皮巴拉水豚表情包_素材编号Zvdipk8P|免抠元素|觅图网</title>
+    <meta name="description" content="觅图网，专注打造高质量设计素材下载平台。汇聚海量优质图片背景素材，涵盖渐变色调、自然纹理等多元类型，适配简约、复古、清新等多样风格。无论是平面设计、电商详情页制作，还是 PPT 展示、社交媒体配图，这里的素材都能为您的创作增添独特魅力，提升视觉效果，是设计师与创作者的灵感宝库，为您的创意之旅提供有力支持。">
+    <meta name="keywords" content="觅图网,设计素材下载,高质量背景素材,图片背景素材,渐变色调素材,自然纹理素材,简约风素材,复古风素材,清新风素材,平面设计素材,电商详情页素材,PPT 素材,社交媒体配图素材,免抠元素,编辑器,作图工具,在线编辑,海报设计">
+    <link rel="icon" href="//cdn.file.mixinnet.cn/editor/2025-04-07-67f3be1235baf.png" type="image/x-icon">
+    <link rel="stylesheet" href="/view/public/css/font-awesomeall.6.4.0.min.css">
+    <!--jquery-->
+    <script src="/view/public/js/jquery-3.6.4.min.js"></script>
+    <!--layui-->
+    <link rel="stylesheet" href="/view/public/layui/css/layui.css?v2.9.20">
+    <script src="/view/public/layui/layui.js?v2.9.20"></script>
+    <!--公共css js-->
+    <link rel="stylesheet" href="/view/public/css/style.css?v=0.3">
+    <script src="/view/public/js/mixinnet.js?v=0.3"></script>
+    
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <img src="//cdn.file.mixinnet.cn/editor/2025-04-07-67f3bee2b60cb.png" alt="觅图网">
+            </a>
+            <ul class="nav-links">
+                                <li>
+                    <a href="/" >首页</a>
+                </li>
+                                <li>
+                    <a href="/png.html" >PNG素材</a>
+                </li>
+                                <li>
+                    <a href="/pic.html" >图片背景</a>
+                </li>
+                                <li>
+                    <a href="/icon" >矢量图标</a>
+                </li>
+                                <li>
+                    <a href="/yinxiao" >音效素材</a>
+                </li>
+                                <li>
+                    <a href="/album.html" >专辑</a>
+                </li>
+                 
+        
+            </ul>
+                        <div class="auth-buttons">
+                <button class="btn" onclick="authModule('login')">登录</button>
+                <button class="btn btn-secondary"  onclick="authModule('register')">注册</button>
+            </div>
+                        <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    
+<div class="item-sucai">
+    <div class="container">
+        <div class="item-container">
+            <!-- 左侧素材展示区 -->
+            <div class="material-preview">
+                <nav aria-label="面包屑导航">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">
+                                <span class="fas fa-home"></span>
+                                <span>首页</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="fas fa-angle-right"></span>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/png.html">
+                                <span class="fas fa-list"></span>
+                                <span>免抠元素</span>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <span class="fas fa-angle-right"></span>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">
+                                <span class="fas fa-image"></span>
+                                <span>素材详情</span>
+                            </a>
+                        </li>
+                    </ol>
+                </nav>
+                <div class="material-preview-img">
+                    <img src="http://cdn.file.mixinnet.cn/huaban/a2f6cd12685e638de0a8d3bc4b1dea8c.webp?imageView2/2/w/500/h/500/format/webp/q/90" alt="【觅图网-pic.51mitu.com】卡皮巴拉510-13卡皮巴拉水豚表情包">
+                </div>
+                <div class="preview-actions">
+                    <button class="preview-btn" onclick="get_canvas_editor('png','178779');">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M15,3L17,5L9,13L7,11V9L15,3M2,20V16H4V20H20V4H15V2H22V22H2V20Z"/>
+                        </svg>
+                    </button>
+                    <button class="preview-btn" onclick="layer.msg('浏览142人次');">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 右侧下载信息区 -->
+            <div class="material-info">
+                <h1 class="title">卡皮巴拉510-13卡皮巴拉水豚表情包</h1>
+                <p class="description">这张免抠元素图片用途广泛。平面设计时，能快速融入海报主题，提升效率，适用于各类海报。电商场景下，可装饰商品详情页，突出特色。制作 PPT，它是创意点缀，让内容更出彩。用于社交媒体配图，能打造独特帖子，增强视觉吸引力。</p>
+                
+                <div class="info-row">
+                    <span class="info-label">格式</span>
+                    <span class="info-value">png</span>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">ID</span>
+                    <span class="info-value">Zvdipk8P</span>
+                </div>
+                
+                <div class="info-row">
+                    <span class="info-label">素材尺寸</span>
+                    <span class="info-value">862x863</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">授权方式</span>
+                    <span class="info-value">CC0协议</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">素材大小</span>
+                    <span class="info-value">39.05 KB</span>
+                </div>
+                <button class="download-btn" onclick="get_dow('png','178779');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    立即下载
+                </button>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="get_shoucang('png','178779');">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                        收藏
+                    </button>
+                    <button class="action-btn" onclick="get_copy('https://pic.51mitu.com/png_Zvdipk8P.html')">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        分享
+                    </button>
+                </div>
+                
+                <div class="tags">
+                    <div class="tags-title">相关标签</div>
+                    <div class="tags-list">
+                                                <a target="_blank" class="tag" href="/png.html?keywords=%E7%AB%96%E5%9B%BE">竖图</a>
+                                                                        <a target="_blank" class="tag" href="/png.html?keywords=%E5%A4%AA%E7%A9%BA">太空</a>
+                                                                        <a target="_blank" class="tag" href="/png.html?keywords=%E5%8D%A1%E7%9A%AE%E5%B7%B4%E6%8B%89%E6%8F%92%E7%94%BB">卡皮巴拉插画</a>
+                                                                        <a target="_blank" class="tag" href="/png.html?keywords=%E5%8D%A1%E7%9A%AE%E5%B7%B4%E6%8B%89%E5%8D%A1%E9%80%9A">卡皮巴拉卡通</a>
+                                                                        <a target="_blank" class="tag" href="/png.html?keywords=%E5%8D%A1%E7%9A%AE%E5%B7%B4%E6%8B%89">卡皮巴拉</a>
+                                                                        <a target="_blank" class="tag" href="/png.html?keywords=%E5%8D%A1%E7%9A%AE%E5%B7%B4%E6%8B%89%E5%8D%A1%E9%80%9A%E5%BD%A2%E8%B1%A1">卡皮巴拉卡通形象</a>
+                                                 
+                        <a target="_blank" class="tag" href="/tag/5VbhPE9nDYUq"><li>创意素材橄榄果素材</li></a>
+                                                <a target="_blank" class="tag" href="/tag/RCM6b3avHNCP"><li>手绘橄榄枝</li></a>
+                                                <a target="_blank" class="tag" href="/tag/rfgMVKJjMz1R"><li>插画壁纸设</li></a>
+                                                <a target="_blank" class="tag" href="/tag/ryMrCxRXxFY4"><li>插画手绘设计手绘插画插画图形</li></a>
+                                                <a target="_blank" class="tag" href="/tag/Z2n6vsoyiyYR"><li>插画设计图形设计绘画设计插图设计</li></a>
+                                                <a target="_blank" class="tag" href="/tag/fY7ZxlpZpTbW"><li>图片可直接打印二次元游戏</li></a>
+                                                <a target="_blank" class="tag" href="/tag/bIHodknll0cX"><li>分享几款幼儿园卡通小边框</li></a>
+                                                <a target="_blank" class="tag" href="/tag/DsHj9JPbXhug"><li>官方网站小游戏参考</li></a>
+                                                <a target="_blank" class="tag" href="/tag/qB5K3ZMbfR0P"><li>觅图网标题标签</li></a>
+                                                <a target="_blank" class="tag" href="/tag/DjtLd1yTUsUn"><li>可视化科技</li></a>
+                                                <a target="_blank" class="tag" href="/tag/j9337vQAaidW"><li>界面通用组件</li></a>
+                                                <a target="_blank" class="tag" href="/tag/pgrLp1w718XK"><li>科技感数据可视化窗口标题</li></a>
+                                                <a target="_blank" class="tag" href="/tag/KFwPa5yZvLLl"><li>大数据可视化大屏</li></a>
+                                                <a target="_blank" class="tag" href="/tag/r7X7S9KsDbOm"><li>企业首页</li></a>
+                                                <a target="_blank" class="tag" href="/tag/eot5lCmjBlZx"><li>科技感首页</li></a>
+                                                <a target="_blank" class="tag" href="/tag/iafAPGCjq2l5"><li>科技感大屏</li></a>
+                                                <a target="_blank" class="tag" href="/tag/6pQ0WO0Bac3R"><li>可视化图标</li></a>
+                                                <a target="_blank" class="tag" href="/tag/hgTWm1JJ9ykc"><li>跨界</li></a>
+                                                <a target="_blank" class="tag" href="/tag/hvl8BkdSlCqN"><li>小红书营销创意鬼才文案</li></a>
+                                                <a target="_blank" class="tag" href="/tag/oYy7y48ImvHk"><li>在地铁里私聊上了</li></a>
+                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 图片列表区域 -->
+<section class="lists-scope" style="margin-bottom: 30px;">
+    <h2 class="container" style="margin-bottom: 30px;">相关推荐</h2>
+    <div class="gallery-wrapper container" id="gallery">
+                <div class="gallery-item mixinnet" data="178779" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/huaban/a2f6cd12685e638de0a8d3bc4b1dea8c.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】卡皮巴拉510-13卡皮巴拉水豚表情包">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_Zvdipk8P.html">
+                            <h3>卡皮巴拉510-13卡皮巴拉水豚表情包</h3>
+                            <p class="dimensions">尺寸:862x863</p>
+                            <p class="file-size">大小:39.05 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','178779');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','178779');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','178779');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="178786" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/huaban/58b97cda8ce44b734526739c3b85bb85.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】卡皮巴拉510-01卡皮巴拉水豚表情包">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_2YqUTnSo.html">
+                            <h3>卡皮巴拉510-01卡皮巴拉水豚表情包</h3>
+                            <p class="dimensions">尺寸:863x863</p>
+                            <p class="file-size">大小:43.91 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','178786');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','178786');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','178786');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="4391" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f24d7375346.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】5个不同表情的猫咪卡通(1779x1000)">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_Z1p3ELXX.html">
+                            <h3>5个不同表情的猫咪卡通(1779x1000)</h3>
+                            <p class="dimensions">尺寸:1779x1000</p>
+                            <p class="file-size">大小:131.53 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','4391');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','4391');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','4391');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="9984" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e955996f1.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】munch_face-icon可爱表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_HTggrJzu.html">
+                            <h3>munch_face-icon可爱表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:213.64 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','9984');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','9984');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','9984');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="9985" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e9548a995.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】peck_face-icon表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_u7G3EXGT.html">
+                            <h3>peck_face-icon表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:196.69 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','9985');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','9985');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','9985');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="9986" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e95393814.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】poe_face-icon伸舌头的表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_tQOTqs3V.html">
+                            <h3>poe_face-icon伸舌头的表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:192.32 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','9986');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','9986');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','9986');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="9987" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e95280f91.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】poe_face_arf-icon吼吼表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_k6vfo9gq.html">
+                            <h3>poe_face_arf-icon吼吼表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:288.78 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','9987');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','9987');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','9987');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="10052" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e9093410b.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】devil万圣节魔鬼表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_rL7VSq4n.html">
+                            <h3>devil万圣节魔鬼表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:235.3 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','10052');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','10052');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','10052');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="10053" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e9080aa49.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】dr.manhattan万圣节表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_rySkdhbD.html">
+                            <h3>dr.manhattan万圣节表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:223.65 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','10053');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','10053');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','10053');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="10054" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e9070f01c.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】dracula万圣节吸血鬼表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_CbUSGkRY.html">
+                            <h3>dracula万圣节吸血鬼表情</h3>
+                            <p class="dimensions">尺寸:512x512</p>
+                            <p class="file-size">大小:170.37 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','10054');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','10054');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','10054');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11699" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e14892b82.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】褐色QQ表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_2wOVpgId.html">
+                            <h3>褐色QQ表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:48.28 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11699');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11699');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11699');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11752" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e107bf5ac.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】黄色圆脸表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_GiAUT052.html">
+                            <h3>黄色圆脸表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:14.85 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11752');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11752');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11752');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11760" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e1031b954.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】偷笑表情图标">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_SABOmRky.html">
+                            <h3>偷笑表情图标</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:15.97 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11760');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11760');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11760');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11762" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e1020593d.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】龇牙表情图标">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_QrSjO01S.html">
+                            <h3>龇牙表情图标</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:13.92 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11762');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11762');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11762');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11766" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e0ffa59f8.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】亲亲表情图标">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_FRkDLdHz.html">
+                            <h3>亲亲表情图标</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:11.82 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11766');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11766');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11766');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11836" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e09a2c3a5.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】万圣节玉米表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_Ymob3IVy.html">
+                            <h3>万圣节玉米表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:59.75 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11836');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11836');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11836');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11843" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e09588935.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】万圣节玉米微笑表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_YkOqsl38.html">
+                            <h3>万圣节玉米微笑表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:45.55 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11843');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11843');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11843');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11844" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e094d1681.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】万圣节玉米伤心表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_6IcasZ9a.html">
+                            <h3>万圣节玉米伤心表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:45.99 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11844');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11844');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11844');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11851" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e09057f22.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】万圣节玉米发怒表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_UCxLmaOT.html">
+                            <h3>万圣节玉米发怒表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:46.32 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11851');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11851');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11851');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="gallery-item mixinnet" data="11855" datam="png">
+            <div class="image-wrapper">
+                <div class="image-wrapper-image">
+                    <div class="positionFixed"></div>
+                    <img src="http://cdn.file.mixinnet.cn/Image/2024-03-14-65f1e08d98ebc.webp?imageView2/2/w/320/h/400/format/webp/q/90" alt="【觅图网-pic.51mitu.com】posh万圣节南瓜表情">
+                </div>
+                <div class="image-overlay">
+                    <div class="image-info">
+                        <a target="_blank" href="/png_jtGrSWYv.html">
+                            <h3>posh万圣节南瓜表情</h3>
+                            <p class="dimensions">尺寸:256x256</p>
+                            <p class="file-size">大小:22.82 KB</p>
+                        </a>
+                        <div class="action-buttons">
+                            <button class="download-btn" onclick="get_dow('png','11855');">
+                                <i class="fas fa-download"></i> 下载
+                            </button>
+                            <button class="favorite-btn" onclick="get_shoucang('png','11855');">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button class="favorite-btn" onclick="get_canvas_editor('png','11855');">
+                                <i class="far fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+</section>
+<div class="man_val_fy"></div>
+<script>
+    var page = 2;
+    var isLoading = false; // 新增一个标志变量，表示是否正在加载数据
+    window.addEventListener('scroll', function() {
+        // 检查特定类名的元素是否可见
+        var elements = document.querySelectorAll('.man_val_fy');
+        elements.forEach(function(element) {
+            var rect = element.getBoundingClientRect();
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                 
+                if (!isLoading) {
+                    isLoading = true
+                    dataHuabanPage();
+                }
+            }
+        });
+    });
+    function dataHuabanPage() {
+        loading = layer.load(2, {
+            shade: [0.2, '#000']
+        });
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            data:{
+                page:page,
+            },
+            url: "https://pic.51mitu.com/png_Zvdipk8P.html",
+            success: function (data) {
+                var html = [];
+                if(data.data.length == 0){
+                    layer.msg('已全部加载完成');
+                }else{
+                    data.data.forEach(function(vo,i){
+                        html += `
+                        <div class="gallery-item mixinnet" data="${vo.id}" datam="png">
+                            <div class="image-wrapper">
+                                <div class="image-wrapper-image">
+                                    <div class="positionFixed"></div>
+                                    <img src="${vo.pic}" alt="【觅图网-pic.51mitu.com】${vo.title}">
+                                </div>
+                                <div class="image-overlay">
+                                    <div class="image-info">
+                                        <a target="_blank" href="${vo.url}">
+                                            <h3>${vo.title}</h3>
+                                            <p class="dimensions">尺寸:${vo.wh}</p>
+                                            <p class="file-size">大小:${vo.size}</p>
+                                        </a>
+                                        <div class="action-buttons">
+                                            <button class="download-btn" onclick="get_dow('png','${vo.id}');">
+                                                <i class="fas fa-download"></i> 下载
+                                            </button>
+                                            <button class="favorite-btn" onclick="get_shoucang('png','${vo.id}');">
+                                                <i class="far fa-heart"></i>
+                                            </button>
+                                            <button class="favorite-btn" onclick="get_canvas_editor('png','${vo['id']}');">
+                                                <i class="far fa-edit"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                    });
+                    $('#gallery').append(html);
+                    isLoading = false
+                    page ++;
+                }
+           
+                layer.close(loading);
+            },
+            error : function() {
+                layer.close(loading);
+                layer.alert('异常', {
+                    title: '提示',
+                    closeBtn: 0
+                });
+            }
+        });
+    }
+</script>
+
+    <!-- 底部 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>关于我们</h3>
+                    <ul class="footer-links">
+                                                <li><a href="/dan/about" target="_blank">关于我们</a></li>
+                                                <li><a href="/dan/contact" target="_blank">联系我们</a></li>
+                                                <li><a href="/dan/xieyi" target="_blank">用户协议</a></li>
+                                                <li><a href="/dan/zhengce" target="_blank">隐私政策</a></li>
+                         
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>帮助中心</h3>
+                    <ul class="footer-links">
+                        
+                        <li><a href="/dan/edge.html">无法下载</a></li>
+                        <li><a href="#">使用教程</a></li>
+                        <li><a href="#">素材授权</a></li>
+                        <li><a href="#">投诉建议</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>商务合作</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">广告投放</a></li>
+                        <li><a href="#">素材征集</a></li>
+                        <li><a href="#">设计师入驻</a></li>
+                        <li><a href="#">企业定制</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>关注我们</h3>
+                    <p>关注官方社交媒体，获取最新素材和活动</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 觅图网 - 高质量设计素材免费下载平台 | <a href="http://beian.miit.gov.cn" target="_blank">黔ICP备2023000914号-2</a>  
+                </p>
+            </div>
+        </div>
+    </footer>
+    <div class="right-fixed-buttons">
+        <button onclick="memoPopup()" class="fixed-btn my-btn" title="备忘录">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <!-- 备忘录纸张 -->
+                <rect x="10" y="10" width="80" height="80" rx="5" fill="#fff" stroke="#fff" stroke-width="2"/>
+                <!-- 备忘录线条 -->
+                <line x1="20" y1="25" x2="80" y2="25" stroke="#000" stroke-width="1"/>
+                <line x1="20" y1="40" x2="80" y2="40" stroke="#000" stroke-width="1"/>
+                <line x1="20" y1="55" x2="80" y2="55" stroke="#000" stroke-width="1"/>
+                <line x1="20" y1="70" x2="80" y2="70" stroke="#000" stroke-width="1"/>
+                <!-- 备忘录夹子 -->
+                <path d="M40 10 Q50 0 60 10" stroke="#fff" stroke-width="3" fill="none"/>
+            </svg>
+        </button>
+        <button onclick="allAdd('900','1200')" class="fixed-btn my-btn" title="编辑器">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="white"/>
+            </svg>
+        </button>
+                <button onclick="authModule('login')" class="fixed-btn my-btn" title="我的">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+            </svg>
+        </button>
+                <button class="fixed-btn vip-btn" title="VIP" onclick="createVipModal();">
+            <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M693.333333 375.466667c14.933333 17.066667 12.8 44.8-4.266666 59.733333-115.2 98.133333-238.933333 98.133333-354.133334 0-17.066667-14.933333-19.2-42.666667-4.266666-59.733333 14.933333-17.066667 42.666667-19.2 59.733333-4.266667 83.2 72.533333 160 72.533333 243.2 0 17.066667-14.933333 44.8-12.8 59.733333 4.266667z m51.2-206.933334H279.466667c-14.933333 0-29.866667 8.533333-36.266667 21.333334l-121.6 206.933333c-8.533333 17.066667-6.4 38.4 6.4 51.2l352 371.2c17.066667 17.066667 42.666667 17.066667 59.733333 2.133333l2.133334-2.133333L896 448c12.8-12.8 14.933333-34.133333 6.4-51.2l-121.6-206.933333c-8.533333-12.8-21.333333-21.333333-36.266667-21.333334z m38.4-85.333333c29.866667 0 55.466667 14.933333 72.533334 38.4V128l136.533333 243.2c17.066667 29.866667 12.8 68.266667-8.533333 96l-2.133334 4.266667-407.466666 441.6c-2.133333 2.133333-2.133333 4.266667-4.266667 4.266666-34.133333 29.866667-85.333333 29.866667-117.333333-2.133333l-4.266667-4.266667L42.666667 471.466667c-23.466667-25.6-29.866667-64-12.8-96l2.133333-4.266667L168.533333 128c14.933333-25.6 40.533333-42.666667 70.4-42.666667h544z"/></svg>
+        </button>
+                <button class="fixed-btn to-top-btn" title="返回顶部" id="toTopBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"/>
+            </svg>
+        </button>
+    </div>
+    <div style="display: none;">
+            </div>
+    <script>
+        const createVipJson = {
+            monthly: {price: 29, downloads: 100, speed: 20},
+            yearly: {price: 99, downloads:  200, speed: 50},
+            lifetime: {price: 199, downloads:  300, speed: 100}
+        };
+        // 返回顶部按钮功能
+        const toTopBtn = document.getElementById('toTopBtn');
+        
+        // 滚动事件监听
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                toTopBtn.classList.add('show');
+            } else {
+                toTopBtn.classList.remove('show');
+            }
+        });
+        
+        // 点击返回顶部
+        toTopBtn.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
