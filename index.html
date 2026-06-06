@@ -5,47 +5,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#FFF8F0" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#2A2320" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0D0D0D" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
 <title>随食一拍 · AI营养助手</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
 
-<!-- ==================== PAGE 1: 拍照识别 ==================== -->
-<div class="page active" id="page-camera">
+<!-- ==================== PAGE 0: 登录/注册 ==================== -->
+<div class="page active" id="page-login">
+  <div style="display:flex;flex-direction:column;min-height:90dvh;justify-content:center;align-items:center;padding:24px;">
 
-  <!-- 水豚噜噜品牌Logo (融入拍照页中央) -->
+    <!-- Logo -->
+    <div style="text-align:center;margin-bottom:28px;">
+      <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- P5 怪盗标志: 高顶礼帽 + 多米诺面具 + 火焰 -->
+        <ellipse cx="40" cy="52" rx="30" ry="6" fill="#E60012"/>
+        <rect x="10" y="48" width="60" height="4" fill="#8B0000"/>
+        <path d="M18 48 L22 16 Q24 6 40 6 Q56 6 58 16 L62 48 Z" fill="#151515" stroke="#E60012" stroke-width="1.5"/>
+        <rect x="18" y="31" width="44" height="5" fill="#E60012"/>
+        <path d="M40 31 Q37 23 33 13 Q40 17 42 7 Q44 17 47 13 Q43 23 40 31" fill="#FF1A2D" opacity="0.95"/>
+        <circle cx="40" cy="19" r="2.5" fill="#FFD700" opacity="0.9"/>
+        <!-- 面具 -->
+        <path d="M20 62 Q30 54 40 57 Q50 54 60 62 Q62 69 60 73 Q50 77 40 75 Q30 77 20 73 Q18 69 20 62Z" fill="none" stroke="white" stroke-width="2"/>
+        <ellipse cx="31" cy="64" rx="5.5" ry="3" fill="#0D0D0D" stroke="white" stroke-width="1"/>
+        <ellipse cx="49" cy="64" rx="5.5" ry="3" fill="#0D0D0D" stroke="white" stroke-width="1"/>
+        <path d="M33 71 Q40 69 47 71" stroke="white" stroke-width="1" fill="none"/>
+        <polygon points="72,8 73.5,14 80,14 74.5,17.5 76.5,24 72,20 67.5,24 69.5,17.5 64,14 70.5,14" fill="#FF1A2D"/>
+      </svg>
+      <div style="font-size:26px;font-weight:800;color:var(--text-primary);margin-top:8px;">TAKE YOUR HEART</div>
+      <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">心を盗む · AI营养助手</div>
+    </div>
+
+    <!-- 登录表单 -->
+    <div class="card" style="width:100%;max-width:340px;">
+      <div class="config-group">
+        <label class="config-label">手机号</label>
+        <input type="tel" class="config-input" id="loginPhone" placeholder="请输入手机号" autocomplete="tel" maxlength="11" style="font-size:16px;text-align:center;letter-spacing:2px;">
+      </div>
+      <div class="config-group">
+        <label class="config-label">密码</label>
+        <input type="password" class="config-input" id="loginPassword" placeholder="请设置/输入密码" autocomplete="current-password" style="font-size:16px;text-align:center;" onkeydown="if(event.key==='Enter')handleLogin()">
+      </div>
+
+      <button class="btn btn-primary" onclick="handleLogin()" style="width:100%;margin-top:4px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4M10 17l5-5-5-5M15 12H3" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        登录
+      </button>
+
+      <button class="btn btn-secondary" onclick="handleRegister()" style="width:100%;margin-top:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="var(--capybara)" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="16" stroke="var(--capybara)" stroke-width="2" stroke-linecap="round"/><line x1="8" y1="12" x2="16" y2="12" stroke="var(--capybara)" stroke-width="2" stroke-linecap="round"/></svg>
+        注册新账号
+      </button>
+
+      <div id="loginMsg" style="text-align:center;font-size:12px;margin-top:10px;min-height:18px;color:var(--text-secondary);"></div>
+
+      <!-- 切换账号（有已登录账号时显示） -->
+      <div id="accountSwitcher" style="display:none;margin-top:10px;border-top:1px solid rgba(230,0,18,0.2);padding-top:10px;">
+        <div style="font-size:11px;color:var(--text-secondary);margin-bottom:6px;">已有账号，快速登录</div>
+        <div id="accountList" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== PAGE 1: 拍照识别 ==================== -->
+<div class="page" id="page-camera">
+
+  <!-- P5怪盗团品牌标志 -->
   <div class="camera-brand">
     <svg class="brand-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- 橘子 -->
-      <circle cx="40" cy="14" r="10" fill="#F4946C" stroke="#E07850" stroke-width="1.5"/>
-      <path d="M40 4 Q44 1 44 4" stroke="#A8C97A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-      <!-- 水豚身体 -->
-      <ellipse cx="40" cy="52" rx="30" ry="24" fill="#C4956A"/>
-      <!-- 水豚肚皮 -->
-      <ellipse cx="40" cy="58" rx="20" ry="14" fill="#F5E1C8"/>
-      <!-- 耳朵 -->
-      <ellipse cx="20" cy="35" rx="7" ry="6" fill="#B88458"/>
-      <ellipse cx="60" cy="35" rx="7" ry="6" fill="#B88458"/>
-      <ellipse cx="20" cy="35" rx="4" ry="3.5" fill="#E8C8A8"/>
-      <ellipse cx="60" cy="35" rx="4" ry="3.5" fill="#E8C8A8"/>
-      <!-- 眼睛 -->
-      <circle cx="32" cy="46" r="2.5" fill="#6B4226"/>
-      <circle cx="48" cy="46" r="2.5" fill="#6B4226"/>
-      <!-- 鼻子 -->
-      <ellipse cx="40" cy="52" rx="3" ry="2" fill="#6B4226"/>
-      <!-- 嘴巴 -->
-      <path d="M37 56 Q40 60 43 56" stroke="#6B4226" stroke-width="1.2" stroke-linecap="round" fill="none"/>
-      <!-- 腮红 -->
-      <circle cx="27" cy="52" r="4" fill="#F4946C" opacity="0.35"/>
-      <circle cx="53" cy="52" r="4" fill="#F4946C" opacity="0.35"/>
-      <!-- 小短手 -->
-      <ellipse cx="18" cy="62" rx="7" ry="5" fill="#C4956A"/>
-      <ellipse cx="62" cy="62" rx="7" ry="5" fill="#C4956A"/>
+      <!-- 预告状卡片底 -->
+      <rect x="6" y="10" width="68" height="60" fill="#151515" stroke="#E60012" stroke-width="2"/>
+      <rect x="10" y="14" width="60" height="52" fill="none" stroke="#E60012" stroke-width="0.5" opacity="0.4"/>
+      <!-- 左上方块切角 -->
+      <polygon points="6,10 18,10 6,22" fill="#E60012"/>
+      <!-- 右下切角 -->
+      <polygon points="74,58 74,70 62,70" fill="#E60012"/>
+      <!-- 高顶礼帽 -->
+      <path d="M28 38 L28 20 Q28 14 40 14 Q52 14 52 20 L52 38" fill="#1A1A1A" stroke="white" stroke-width="1.2"/>
+      <rect x="24" y="28" width="32" height="3" fill="#E60012"/>
+      <ellipse cx="40" cy="38" rx="20" ry="4" fill="#E60012"/>
+      <!-- 五角星 -->
+      <polygon points="40,44 43,53 52,53 45,58 48,67 40,62 32,67 35,58 28,53 37,53" fill="#E60012"/>
+      <!-- 火焰 -->
+      <path d="M40 28 Q38 22 36 16 Q40 19 42 12 Q44 19 44 16 Q42 22 40 28" fill="#FF1A2D"/>
     </svg>
-    <div class="brand-name">随食一拍</div>
-    <div class="brand-sub">一拍知营养，健康伴一生</div>
+    <div class="brand-name">PHANTOM THIEVES</div>
+    <div class="brand-sub">心を盗む · 营养即正义</div>
   </div>
 
   <!-- Upload Zone -->
@@ -66,6 +114,7 @@
       <img id="previewImg" style="display:none" alt="食物图片">
     </div>
     <input type="file" id="fileInput" accept="image/*" capture="environment" onchange="handleFile(this)">
+    <input type="file" id="albumInput" accept="image/*" onchange="handleFile(this)">
 
     <div class="meal-type-row" id="mealTypeRow">
       <div class="meal-type-btn sel" onclick="selectMealType('breakfast')">🌅 早餐</div>
@@ -75,7 +124,7 @@
     </div>
 
     <div class="upload-actions">
-      <button class="btn btn-secondary" onclick="document.getElementById('fileInput').click()">
+      <button class="btn btn-secondary" onclick="document.getElementById('albumInput').click()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="var(--capybara)" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.5" fill="var(--capybara)"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="var(--capybara)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         相册
       </button>
@@ -209,7 +258,7 @@
       <div class="chat-msgs" id="chatMsgs">
         <div class="chat-msg ai">
           <div class="avatar">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="13" rx="8" ry="7" fill="#F5E1C8" stroke="#C4956A" stroke-width="1.2"/><circle cx="9" cy="11" r="1.3" fill="#6B4226"/><circle cx="15" cy="11" r="1.3" fill="#6B4226"/><ellipse cx="12" cy="15" rx="2.5" ry="1.5" fill="#6B4226"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3 L16 7 L14 7 L14 15 L16 15 L12 19 L8 15 L10 15 L10 7 L8 7 Z" fill="#E60012"/><circle cx="12" cy="7" r="2" fill="#FFFFFF"/></svg>
           </div>
           <div class="bubble">你好！我是你的专属AI营养师。我了解你的健康档案和饮食记录，可以给你个性化建议。<br><br>你可以问我：</div>
         </div>
@@ -232,84 +281,50 @@
 <div class="page" id="page-profile">
   <div style="padding-top:12px;"></div>
 
-  <!-- API Config (从拍照页移过来) -->
-  <div class="card">
-    <div class="collapse-toggle" onclick="toggleConfig()">
-      <div class="card-header" style="margin-bottom:0; flex:1;">
-        <div class="card-icon blue">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="var(--capybara)" stroke-width="2"/><circle cx="12" cy="5" r="2" stroke="var(--capybara)" stroke-width="2"/><path d="M12 8v2M12 12v4M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5 12H3M21 12h-2M5.6 18.4l1.4-1.4M17 7l1.4-1.4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </div>
-        <div class="card-title">API 配置</div>
-      </div>
-      <span class="arrow" id="configArrow">▶</span>
-    </div>
-    <div class="collapse-body" id="configPanel">
-      <div class="collapse-body-inner">
-        <div class="config-group">
-          <label class="config-label">API Base URL</label>
-          <input type="text" class="config-input" id="apiBase" placeholder="https://aiping.cn/api/v1" autocomplete="off">
-          <div class="preset-btns">
-            <button class="preset-btn" onclick="setPreset('aiping')">aiping.cn</button>
-            <button class="preset-btn" onclick="setPreset('openai')">OpenAI</button>
-            <button class="preset-btn" onclick="setPreset('openrouter')">OpenRouter</button>
-          </div>
-        </div>
-        <div class="config-group">
-          <label class="config-label">API Key</label>
-          <input type="password" class="config-input" id="apiKey" placeholder="QC..." autocomplete="off">
-          <div class="config-status" id="keyStatus"><span class="dot off"></span> 未配置</div>
-        </div>
-        <div class="config-group">
-          <label class="config-label">模型名称 (视觉模型)</label>
-          <input type="text" class="config-input" id="modelName" placeholder="Qwen3-VL-30B-A3B-Instruct" autocomplete="off">
-          <div class="preset-btns">
-            <button class="preset-btn" onclick="setModel('Qwen3-VL-30B-A3B-Instruct')">Qwen3-VL-30B</button>
-            <button class="preset-btn" onclick="setModel('Qwen2.5-VL-72B-Instruct')">Qwen2.5-VL-72B</button>
-            <button class="preset-btn" onclick="setModel('GLM-4.6V')">GLM-4.6V</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Health Profile -->
   <div class="card">
     <div class="card-header">
       <div class="card-icon blue">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="15" rx="8" ry="7" fill="#F5E1C8" stroke="var(--capybara)" stroke-width="1.5"/><circle cx="12" cy="7" r="4" fill="var(--capybara)" fill-opacity="0.2" stroke="var(--capybara)" stroke-width="1.5"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11 2 L15 6 L13 6 L13 14 L15 14 L11 18 L7 14 L9 14 L9 6 L7 6 Z" fill="#E60012"/><rect x="6" y="18" width="12" height="3" fill="#E60012"/></svg>
       </div>
       <div class="card-title">健康档案</div>
+    </div>
+    <div class="config-group">
+      <label class="config-label">用户ID</label>
+      <input type="text" class="config-input" id="pUserID" placeholder="手机号" onchange="saveProfile()">
     </div>
     <div class="form-row">
       <div class="config-group">
         <label class="config-label">性别</label>
         <select class="form-select" id="pGender" onchange="saveProfile()">
+          <option value="">请选择</option>
           <option value="male">男</option><option value="female">女</option>
         </select>
       </div>
       <div class="config-group">
         <label class="config-label">年龄</label>
-        <input type="number" class="config-input" id="pAge" placeholder="25" min="10" max="120" onchange="saveProfile()">
+        <input type="number" class="config-input" id="pAge" placeholder="" min="10" max="120" onchange="saveProfile()">
       </div>
     </div>
     <div class="form-row">
       <div class="config-group">
         <label class="config-label">身高 (cm)</label>
-        <input type="number" class="config-input" id="pHeight" placeholder="170" min="100" max="250" onchange="saveProfile()">
+        <input type="number" class="config-input" id="pHeight" placeholder="" min="100" max="250" onchange="saveProfile()">
       </div>
       <div class="config-group">
         <label class="config-label">体重 (kg)</label>
-        <input type="number" class="config-input" id="pWeight" placeholder="65" min="30" max="200" step="0.1" onchange="saveProfile()">
+        <input type="number" class="config-input" id="pWeight" placeholder="" min="30" max="200" step="0.1" onchange="saveProfile()">
       </div>
     </div>
     <div class="form-row">
       <div class="config-group">
         <label class="config-label">目标体重 (kg)</label>
-        <input type="number" class="config-input" id="pTargetWeight" placeholder="60" min="30" max="200" step="0.1" onchange="saveProfile()">
+        <input type="number" class="config-input" id="pTargetWeight" placeholder="" min="30" max="200" step="0.1" onchange="saveProfile()">
       </div>
       <div class="config-group">
         <label class="config-label">活动等级</label>
         <select class="form-select" id="pActivity" onchange="saveProfile()">
+          <option value="">请选择</option>
           <option value="1.2">久坐 (基本不运动)</option>
           <option value="1.375">轻度 (每周1-2次)</option>
           <option value="1.55">中度 (每周3-5次)</option>
@@ -381,51 +396,99 @@
     </div>
     <div id="gameCardInner"></div>
   </div>
+
+  <!-- API 配置 -->
+  <div class="card">
+    <div class="collapse-toggle" onclick="toggleConfig()">
+      <div class="card-header" style="margin-bottom:0; flex:1;">
+        <div class="card-icon blue">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="var(--capybara)" stroke-width="2"/><circle cx="12" cy="5" r="2" stroke="var(--capybara)" stroke-width="2"/><path d="M12 8v2M12 12v4M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5 12H3M21 12h-2M5.6 18.4l1.4-1.4M17 7l1.4-1.4" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div class="card-title">API 配置</div>
+      </div>
+      <span class="arrow" id="configArrow">▶</span>
+    </div>
+    <div class="collapse-body" id="configPanel">
+      <div class="collapse-body-inner">
+        <div class="config-group">
+          <label class="config-label">API Base URL</label>
+          <input type="text" class="config-input" id="apiBase" placeholder="https://aiping.cn/api/v1" autocomplete="off">
+          <div class="preset-btns">
+            <button class="preset-btn" onclick="setPreset('aiping')">aiping.cn</button>
+            <button class="preset-btn" onclick="setPreset('openai')">OpenAI</button>
+            <button class="preset-btn" onclick="setPreset('openrouter')">OpenRouter</button>
+          </div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">API Key</label>
+          <input type="password" class="config-input" id="apiKey" placeholder="QC..." autocomplete="off">
+          <div class="config-status" id="keyStatus"><span class="dot off"></span> 未配置</div>
+        </div>
+        <div class="config-group">
+          <label class="config-label">模型名称 (视觉模型)</label>
+          <input type="text" class="config-input" id="modelName" placeholder="Qwen3-VL-30B-A3B-Instruct" autocomplete="off">
+          <div class="preset-btns">
+            <button class="preset-btn" onclick="setModel('Qwen3-VL-30B-A3B-Instruct')">Qwen3-VL-30B</button>
+            <button class="preset-btn" onclick="setModel('Qwen2.5-VL-72B-Instruct')">Qwen2.5-VL-72B</button>
+            <button class="preset-btn" onclick="setModel('GLM-4.6V')">GLM-4.6V</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 退出登录 -->
+  <button class="btn btn-secondary" onclick="handleLogout()" style="width:100%;margin-bottom:16px;color:#E60012;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" stroke="#E60012" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    退出登录
+  </button>
 </div>
 
 <!-- ==================== Bottom Tab Bar ==================== -->
-<div class="tab-bar">
+<div class="tab-bar" style="display:none;">
   <div class="tab-item active" onclick="switchTab('camera')">
     <span class="tab-icon">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- 水豚脸 + 相机 -->
-        <rect x="1.5" y="4.5" width="25" height="18" rx="4" class="icon-capy"/>
-        <circle cx="14" cy="14" r="6" class="icon-capy" fill="rgba(196,149,106,0.06)"/>
-        <!-- 头顶小橘子 -->
-        <circle cx="14" cy="3" r="3" fill="#F4946C" opacity="0.7"/>
+        <!-- P5: 面具之眼 -->
+        <path d="M4 12 Q6 6 14 5 Q22 6 24 12 Q22 16 14 15 Q6 16 4 12Z" class="icon-capy"/>
+        <circle cx="14" cy="12" r="3" class="icon-capy" fill="currentColor" opacity="0.2"/>
+        <circle cx="14" cy="12" r="1.5" fill="currentColor"/>
+        <path d="M2 12 L5 12 M23 12 L26 12" class="icon-capy" stroke-width="1.5"/>
       </svg>
     </span>拍照
   </div>
   <div class="tab-item" onclick="switchTab('record')">
     <span class="tab-icon">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- 水豚爪印 -->
-        <ellipse cx="14" cy="17" rx="10" ry="8" class="icon-capy"/>
-        <ellipse cx="9" cy="10" rx="3.5" ry="4" class="icon-capy"/>
-        <ellipse cx="19" cy="10" rx="3.5" ry="4" class="icon-capy"/>
-        <ellipse cx="14" cy="9" rx="3.5" ry="3.5" class="icon-capy"/>
+        <!-- P5: 预告状卡片 -->
+        <rect x="3" y="4" width="22" height="20" class="icon-capy"/>
+        <rect x="6" y="7" width="16" height="14" class="icon-capy" stroke-width="0.8" opacity="0.4"/>
+        <polygon points="3,4 9,4 3,10" fill="currentColor" opacity="0.3"/>
+        <polygon points="25,16 25,24 19,24" fill="currentColor" opacity="0.3"/>
+        <circle cx="18" cy="9" r="1.5" fill="currentColor" opacity="0.5"/>
+        <line x1="7" y1="17" x2="19" y2="17" class="icon-capy" stroke-width="1"/>
       </svg>
     </span>记录
   </div>
   <div class="tab-item" onclick="switchTab('assistant')">
     <span class="tab-icon">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- 水豚 + 聊天气泡 -->
-        <path d="M3 8a4 4 0 014-4h14a4 4 0 014 4v9a4 4 0 01-4 4h-3l-4 4-4-4H7a4 4 0 01-4-4V8z" class="icon-capy"/>
-        <ellipse cx="14" cy="12" rx="2.5" ry="2" fill="var(--text-tertiary)" opacity="0.5"/>
+        <!-- P5: 气泡中的怪盗面具 -->
+        <path d="M4 10 Q4 5 7 3 H21 Q24 5 24 10 V17 Q24 20 21 21 H17 L14 25 L11 21 H7 Q4 20 4 17 Z" class="icon-capy"/>
+        <path d="M9 14 Q11.5 12 14 14 Q16.5 12 19 14" class="icon-capy" stroke-width="1.2" fill="none"/>
+        <circle cx="11.5" cy="12.5" r="1.5" class="icon-capy" fill="none" stroke-width="1.2"/>
+        <circle cx="16.5" cy="12.5" r="1.5" class="icon-capy" fill="none" stroke-width="1.2"/>
       </svg>
     </span>助手
   </div>
   <div class="tab-item" onclick="switchTab('profile')">
     <span class="tab-icon">
       <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- 水豚脸轮廓 -->
-        <ellipse cx="14" cy="16" rx="11" ry="10" class="icon-capy"/>
-        <circle cx="8" cy="12" r="1.5" fill="var(--nose)"/>
-        <circle cx="20" cy="12" r="1.5" fill="var(--nose)"/>
-        <ellipse cx="14" cy="18" rx="3" ry="2" fill="var(--nose)" opacity="0.5"/>
-        <!-- 头顶橘子 -->
-        <circle cx="14" cy="6" r="5" fill="#F4946C" opacity="0.7"/>
+        <!-- P5: 高顶礼帽 -->
+        <rect x="5" y="20" width="18" height="3" rx="0.5" class="icon-capy" fill="currentColor" opacity="0.3"/>
+        <path d="M8 20 L9 6 Q10 2 14 2 Q18 2 19 6 L20 20" class="icon-capy"/>
+        <rect x="7" y="13" width="14" height="2" class="icon-capy" fill="currentColor" opacity="0.3"/>
+        <path d="M14 2 Q11 4 12 7 Q14 3 14 2" fill="#E60012" opacity="0.8"/>
       </svg>
     </span>我的
   </div>
@@ -438,8 +501,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
 
 <!-- Main App JS -->
-<script src="testdata-loader.js"></script>
-<script src="js/app.js"></script>
+<script src="js/app.js?v=2"></script>
+<script src="js/account.js?v=2"></script>
 
 </body>
 </html>
