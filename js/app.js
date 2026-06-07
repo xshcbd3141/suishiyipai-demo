@@ -13,6 +13,13 @@ function getChartTheme() {
   };
 }
 
+// ===== API 默认配置（所有用户自动生效） =====
+const DEFAULT_API = {
+  base: 'https://aiping.cn/api/v1',
+  key: 'QC-9f8cb4de05fea4afb0e86a79f8a1b78c-4e15149f664ccf9e1c4004d69445a703',
+  model: 'Qwen3-VL-30B-A3B-Instruct',
+};
+
 // ===== 全局状态 =====
 let selectedFile = null;
 let currentMealType = 'lunch';
@@ -1940,11 +1947,13 @@ function generateMonthReport() { generatePeriodReport('month'); }
 
 // ===== 登录后初始化当前用户数据 =====
 function initAppForCurrentUser() {
-  // API 配置从全局读取
-  const base = localStorage.getItem('ssyp_api_base'), key = localStorage.getItem('ssyp_api_key'), model = localStorage.getItem('ssyp_model');
-  if (base) $('apiBase').value = base;
-  if (key) $('apiKey').value = key;
-  if (model) $('modelName').value = model;
+  // API 配置：优先 localStorage，回退默认值
+  const base = localStorage.getItem('ssyp_api_base') || DEFAULT_API.base;
+  const key = localStorage.getItem('ssyp_api_key') || DEFAULT_API.key;
+  const model = localStorage.getItem('ssyp_model') || DEFAULT_API.model;
+  $('apiBase').value = base;
+  $('apiKey').value = key;
+  $('modelName').value = model;
   updateStatus();
   updateNavStatus();
   // 刷新当前活跃的页面
@@ -1958,11 +1967,13 @@ function initAppForCurrentUser() {
 
 // ===== 初始化 =====
 (function init() {
-  // API 配置全局读取
-  const base = localStorage.getItem('ssyp_api_base'), key = localStorage.getItem('ssyp_api_key'), model = localStorage.getItem('ssyp_model');
-  if (base) $('apiBase').value = base;
-  if (key) $('apiKey').value = key;
-  if (model) $('modelName').value = model;
+  // API 配置：优先 localStorage，回退默认值
+  const base = localStorage.getItem('ssyp_api_base') || DEFAULT_API.base;
+  const key = localStorage.getItem('ssyp_api_key') || DEFAULT_API.key;
+  const model = localStorage.getItem('ssyp_model') || DEFAULT_API.model;
+  $('apiBase').value = base;
+  $('apiKey').value = key;
+  $('modelName').value = model;
   updateStatus();
   updateNavStatus();
   // 暗色模式初始化
