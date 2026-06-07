@@ -52,10 +52,11 @@ function switchTab(name) {
 
 // ===== API 配置 =====
 function saveConfig() {
+  // API 配置全局统一，不跟随账户
   const base = $('apiBase').value.trim(), key = $('apiKey').value.trim(), model = $('modelName').value.trim();
-  if (base) acSet(SK.apiBase, base);
-  if (key) acSet(SK.apiKey, key);
-  if (model) acSet(SK.model, model);
+  if (base) localStorage.setItem('ssyp_api_base', base);
+  if (key) localStorage.setItem('ssyp_api_key', key);
+  if (model) localStorage.setItem('ssyp_model', model);
 }
 function updateStatus() {
   const base = $('apiBase').value.trim(), key = $('apiKey').value.trim(), model = $('modelName').value.trim();
@@ -1939,7 +1940,8 @@ function generateMonthReport() { generatePeriodReport('month'); }
 
 // ===== 登录后初始化当前用户数据 =====
 function initAppForCurrentUser() {
-  const base = acGet(SK.apiBase), key = acGet(SK.apiKey), model = acGet(SK.model);
+  // API 配置从全局读取
+  const base = localStorage.getItem('ssyp_api_base'), key = localStorage.getItem('ssyp_api_key'), model = localStorage.getItem('ssyp_model');
   if (base) $('apiBase').value = base;
   if (key) $('apiKey').value = key;
   if (model) $('modelName').value = model;
@@ -1956,7 +1958,8 @@ function initAppForCurrentUser() {
 
 // ===== 初始化 =====
 (function init() {
-  const base = acGet(SK.apiBase), key = acGet(SK.apiKey), model = acGet(SK.model);
+  // API 配置全局读取
+  const base = localStorage.getItem('ssyp_api_base'), key = localStorage.getItem('ssyp_api_key'), model = localStorage.getItem('ssyp_model');
   if (base) $('apiBase').value = base;
   if (key) $('apiKey').value = key;
   if (model) $('modelName').value = model;

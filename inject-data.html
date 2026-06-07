@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据注入工具</title>
+<style>
+  body { font-family: -apple-system, sans-serif; max-width: 500px; margin: 40px auto; padding: 20px; background: #0D0D0D; color: #fff; }
+  h1 { color: #E60012; }
+  button { padding: 14px 28px; background: #E60012; color: #fff; border: none; font-size: 16px; font-weight: 700; cursor: pointer; letter-spacing: 2px; margin: 8px; }
+  button:hover { background: #FF1A2D; }
+  .log { margin-top: 16px; font-size: 12px; color: #999; white-space: pre-wrap; }
+  .ok { color: #0f0; }
+</style>
+</head>
+<body>
+<h1>🔴 随食一拍 · 数据注入</h1>
+<p>为展示版注入30天全套演示数据</p>
+
+<button onclick="injectAll()">💉 注入30天展示数据</button>
+<button onclick="clearAll()" style="background:#444;">🗑 清除所有数据</button>
+
+<div class="log" id="log"></div>
+
+<script>
+const PHONE = '13800000000';
+const PWD = '123456';
+const SALT = 'suishiyipai_salt';
+
+function log(msg) { document.getElementById('log').innerHTML += msg + '\n'; }
+
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password + SALT);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
+// ===== 30天日期生成 =====
+function getDates(days) {
+  const dates = [];
+  const now = new Date();
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    dates.push(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'));
+  }
+  return dates;
+}
+
+// ===== 生成30天饮食数据 =====
+function generateMeals(dates) {
+  const meals = {};
+
+  // 食物库：中文日常食物(名称, 千卡/100g, 蛋白/100g, 脂肪/100g, 碳水/100g, 类别)
+  const FOODS = {
+    // 早餐
+    豆浆: [31, 3, 1.6, 1.2, '饮品'], 油条: [388, 6.9, 17.6, 51, '油炸'], 鸡蛋: [144, 13.3, 8.8, 2.8, '蛋类'], 包子_猪肉: [227, 9.6, 10, 27, '面点'],
+    包子_菜: [185, 6.2, 5.8, 28, '面点'], 馒头: [223, 7, 1.1, 44, '面点'], 小米粥: [46, 1.4, 0.7, 8.4, '粥品'], 牛奶: [54, 3, 3.2, 3.4, '饮品'],
+    全麦面包: [246, 10.6, 3.4, 47, '烘焙'], 煎饼果子: [260, 8.5, 12, 32, '小吃'], 豆腐脑: [47, 3.8, 1.9, 3.5, '豆制品'], 燕麦粥: [68, 2.4, 1.4, 12, '粥品'],
+    肠粉: [110, 3.8, 3.2, 17, '小吃'], 小笼包: [210, 9.5, 11, 20, '面点'], 馄饨: [178, 7.8, 8.5, 19, '面点'],
+    // 午餐/晚餐主食
+    米饭: [116, 2.6, 0.3, 25.9, '主食'], 面条: [110, 3.5, 1.1, 22, '主食'], 馒头_大: [223, 7, 1.1, 44, '主食'],
+    // 荤菜
+    红烧肉: [395, 7.2, 37, 4.9, '荤菜'], 宫保鸡丁: [185, 16.7, 10.4, 7.8, '荤菜'], 糖醋排骨: [310, 16.5, 25, 6, '荤菜'],
+    清蒸鱼: [102, 18, 3.5, 0, '荤菜'], 回锅肉: [320, 13, 28, 4, '荤菜'], 红烧牛肉: [190, 20, 11, 3, '荤菜'],
+    可乐鸡翅: [210, 16, 14, 6, '荤菜'], 水煮鱼: [158, 17, 9.5, 2, '荤菜'], 鱼香肉丝: [165, 12, 10, 8, '荤菜'],
+    麻婆豆腐: [120, 7.5, 8, 5.5, '豆制品'], 葱爆羊肉: [195, 18, 13, 3, '荤菜'], 蒜蓉虾: [99, 18.6, 1.8, 2.5, '海鲜'],
+    红烧鸡块: [175, 20, 9.5, 4, '荤菜'], 番茄牛腩: [145, 15, 7, 6, '荤菜'], 青椒肉丝: [140, 11, 8.5, 5, '荤菜'],
+    // 素菜
+    炒青菜: [50, 2.5, 3, 3.5, '蔬菜'], 番茄炒蛋: [85, 4.5, 5.5, 4.5, '蔬菜'], 地三鲜: [130, 3, 7.5, 13, '蔬菜'],
+    干煸四季豆: [85, 3, 5.5, 7, '蔬菜'], 蒜蓉西兰花: [45, 3.5, 2.5, 2.8, '蔬菜'], 醋溜白菜: [38, 1.5, 2, 3.5, '蔬菜'],
+    凉拌黄瓜: [25, 0.8, 1.8, 2.5, '蔬菜'], 清炒豆芽: [42, 3.2, 1.5, 4.5, '蔬菜'], 香菇青菜: [48, 3, 2, 5, '蔬菜'],
+    // 汤品
+    紫菜蛋花汤: [32, 2.5, 1.5, 2, '汤品'], 番茄蛋汤: [35, 2.8, 1.8, 2.5, '汤品'], 排骨汤: [85, 6, 6.5, 1, '汤品'],
+    // 加餐/零食
+    奶茶: [65, 2.2, 2.5, 9, '饮品'], 水果拼盘: [55, 0.6, 0.2, 13, '水果'], 坚果: [607, 20, 53, 20, '零食'],
+    酸奶: [72, 2.5, 2.7, 9.3, '乳制品'], 咖啡: [31, 2, 1.8, 2, '饮品'], 苹果: [52, 0.3, 0.2, 14, '水果'],
+    香蕉: [91, 1.4, 0.4, 21, '水果'], 橙子: [47, 0.8, 0.2, 11, '水果'], 饼干: [433, 8, 14, 70, '零食'],
+    蛋糕: [347, 5.3, 16, 50, '烘焙'], 冰淇淋: [207, 2.9, 13, 24, '甜品'],
+  };
+
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function randInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+  // 每种餐型预设模板
+  const MEAL_TEMPLATES = {
+    breakfast: [
+      [{ food: '豆浆', weight: 300 }, { food: '油条', weight: 120 }, { food: '鸡蛋', weight: 60 }],
+      [{ food: '牛奶', weight: 250 }, { food: '全麦面包', weight: 80 }, { food: '鸡蛋', weight: 60 }],
+      [{ food: '小米粥', weight: 350 }, { food: '包子_猪肉', weight: 120 }, { food: '鸡蛋', weight: 60 }],
+      [{ food: '豆腐脑', weight: 300 }, { food: '煎饼果子', weight: 200 }],
+      [{ food: '燕麦粥', weight: 300 }, { food: '馒头', weight: 100 }, { food: '鸡蛋', weight: 60 }],
+      [{ food: '肠粉', weight: 250 }, { food: '鸡蛋', weight: 60 }, { food: '豆浆', weight: 250 }],
+      [{ food: '馄饨', weight: 250 }, { food: '鸡蛋', weight: 60 }],
+      [{ food: '小笼包', weight: 200 }, { food: '豆浆', weight: 300 }],
+      [{ food: '牛奶', weight: 250 }, { food: '包子_菜', weight: 150 }],
+      [{ food: '全麦面包', weight: 80 }, { food: '鸡蛋', weight: 60 }, { food: '酸奶', weight: 150 }],
+    ],
+    lunch: [
+      [{ food: '米饭', weight: 200 }, { food: '宫保鸡丁', weight: 180 }, { food: '炒青菜', weight: 150 }, { food: '紫菜蛋花汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '红烧牛肉', weight: 150 }, { food: '蒜蓉西兰花', weight: 130 }, { food: '番茄蛋汤', weight: 250 }],
+      [{ food: '面条', weight: 300 }, { food: '番茄牛腩', weight: 180 }, { food: '凉拌黄瓜', weight: 100 }],
+      [{ food: '米饭', weight: 200 }, { food: '清蒸鱼', weight: 200 }, { food: '地三鲜', weight: 160 }, { food: '紫菜蛋花汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '鱼香肉丝', weight: 160 }, { food: '香菇青菜', weight: 140 }, { food: '排骨汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '回锅肉', weight: 140 }, { food: '干煸四季豆', weight: 130 }, { food: '紫菜蛋花汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '青椒肉丝', weight: 160 }, { food: '醋溜白菜', weight: 150 }],
+      [{ food: '馒头_大', weight: 150 }, { food: '蒜蓉虾', weight: 180 }, { food: '清炒豆芽', weight: 160 }],
+      [{ food: '面条', weight: 300 }, { food: '麻婆豆腐', weight: 180 }, { food: '炒青菜', weight: 150 }],
+      [{ food: '米饭', weight: 200 }, { food: '可乐鸡翅', weight: 180 }, { food: '蒜蓉西兰花', weight: 130 }],
+      [{ food: '米饭', weight: 200 }, { food: '葱爆羊肉', weight: 140 }, { food: '凉拌黄瓜', weight: 100 }, { food: '番茄蛋汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '红烧肉', weight: 120 }, { food: '炒青菜', weight: 150 }, { food: '紫菜蛋花汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '番茄炒蛋', weight: 180 }, { food: '干煸四季豆', weight: 130 }],
+      [{ food: '米饭', weight: 200 }, { food: '糖醋排骨', weight: 160 }, { food: '香菇青菜', weight: 140 }, { food: '排骨汤', weight: 250 }],
+      [{ food: '米饭', weight: 200 }, { food: '水煮鱼', weight: 200 }, { food: '清炒豆芽', weight: 160 }],
+    ],
+    dinner: [
+      [{ food: '米饭', weight: 150 }, { food: '清蒸鱼', weight: 160 }, { food: '蒜蓉西兰花', weight: 130 }],
+      [{ food: '米饭', weight: 150 }, { food: '番茄炒蛋', weight: 180 }, { food: '凉拌黄瓜', weight: 100 }],
+      [{ food: '米饭', weight: 150 }, { food: '麻婆豆腐', weight: 180 }, { food: '炒青菜', weight: 150 }],
+      [{ food: '面条', weight: 200 }, { food: '青椒肉丝', weight: 140 }, { food: '醋溜白菜', weight: 130 }],
+      [{ food: '米饭', weight: 150 }, { food: '红烧鸡块', weight: 150 }, { food: '香菇青菜', weight: 140 }, { food: '番茄蛋汤', weight: 250 }],
+      [{ food: '米饭', weight: 150 }, { food: '鱼香肉丝', weight: 140 }, { food: '干煸四季豆', weight: 120 }],
+      [{ food: '米饭', weight: 150 }, { food: '宫保鸡丁', weight: 150 }, { food: '蒜蓉西兰花', weight: 130 }, { food: '紫菜蛋花汤', weight: 250 }],
+      [{ food: '米饭', weight: 150 }, { food: '蒜蓉虾', weight: 160 }, { food: '炒青菜', weight: 150 }],
+      [{ food: '馒头_大', weight: 120 }, { food: '清炒豆芽', weight: 160 }, { food: '番茄炒蛋', weight: 150 }],
+      [{ food: '米饭', weight: 150 }, { food: '葱爆羊肉', weight: 120 }, { food: '醋溜白菜', weight: 150 }],
+    ],
+    snack: [
+      [{ food: '苹果', weight: 200 }],
+      [{ food: '酸奶', weight: 200 }],
+      [{ food: '香蕉', weight: 150 }],
+      [{ food: '坚果', weight: 30 }],
+      [{ food: '水果拼盘', weight: 250 }],
+      [{ food: '咖啡', weight: 350 }],
+      [{ food: '橙子', weight: 200 }],
+    ],
+  };
+
+  // 每周规划：哪些天有加餐(周末) / 哪些天晚餐轻(周一) / 哪些天有"欺骗餐"
+  // Day 1 = dates[0] = 30天前
+  const isWeekend = (i) => { const d = new Date(dates[i]); return d.getDay() === 0 || d.getDay() === 6; };
+  const isCheatDay = (i) => [6, 13, 20, 27].includes(i); // 每周一次放纵日
+  const isLightDay = (i) => [1, 8, 15, 22].includes(i); // 周一清淡
+  const skippedDays = [0, 16, 24]; // 某几天没有记录（模拟真实遗漏）
+
+  for (let i = 0; i < dates.length; i++) {
+    if (skippedDays.includes(i)) continue;
+
+    const date = dates[i];
+    const dayMeals = [];
+    let mealIdx = 0;
+
+    // 早餐 (90%概率有)
+    if (Math.random() > 0.1) {
+      const tpl = pick(MEAL_TEMPLATES.breakfast);
+      dayMeals.push(buildMeal('breakfast', tpl, dates[i], mealIdx++));
+    }
+
+    // 午餐 (95%)
+    if (Math.random() > 0.05) {
+      let tpl;
+      if (isCheatDay(i)) {
+        tpl = MEAL_TEMPLATES.lunch.find(t => t.some(f => f.food === '红烧肉' || f.food === '糖醋排骨')) || pick(MEAL_TEMPLATES.lunch);
+      } else if (isLightDay(i)) {
+        tpl = MEAL_TEMPLATES.lunch.find(t => t.some(f => f.food === '清蒸鱼')) || pick(MEAL_TEMPLATES.lunch.slice(0, 6));
+      } else {
+        tpl = pick(MEAL_TEMPLATES.lunch);
+      }
+      dayMeals.push(buildMeal('lunch', tpl, dates[i], mealIdx++));
+    }
+
+    // 晚餐 (85%)
+    if (Math.random() > 0.15) {
+      const tpl = isCheatDay(i) ? pick(MEAL_TEMPLATES.dinner.slice(3)) : pick(MEAL_TEMPLATES.dinner);
+      dayMeals.push(buildMeal('dinner', tpl, dates[i], mealIdx++));
+    }
+
+    // 加餐 (周末60%, 工作日20%, 欺骗日80%)
+    const snackChance = isCheatDay(i) ? 0.8 : isWeekend(i) ? 0.6 : 0.2;
+    if (Math.random() < snackChance) {
+      const tpl = isCheatDay(i)
+        ? [{ food: '奶茶', weight: 500 }, { food: '蛋糕', weight: 80 }] // 放纵+奶茶蛋糕
+        : pick(MEAL_TEMPLATES.snack);
+      dayMeals.push(buildMeal('snack', tpl, dates[i], mealIdx++));
+    }
+
+    meals[date] = dayMeals;
+  }
+  return meals;
+}
+
+function buildMeal(mealType, foods, dateStr, idx) {
+  const allFoods = foods.map(f => {
+    const base = getFoodBase(f.food);
+    const weight = f.weight || randInt(100, 200);
+    const ratio = weight / 100;
+    return {
+      name: f.food.replace(/_.*/, '').replace('_大', ''),
+      weight: weight,
+      cal: Math.round(base[0] * ratio),
+      pro: Math.round(base[1] * ratio * 10) / 10,
+      fat: Math.round(base[2] * ratio * 10) / 10,
+      carb: Math.round(base[3] * ratio * 10) / 10,
+      category: base[4],
+      confidence: randInt(75, 98),
+    };
+  });
+
+  const totalCal = allFoods.reduce((s, f) => s + f.cal, 0);
+  const totalPro = Math.round(allFoods.reduce((s, f) => s + f.pro, 0) * 10) / 10;
+  const totalFat = Math.round(allFoods.reduce((s, f) => s + f.fat, 0) * 10) / 10;
+  const totalCarb = Math.round(allFoods.reduce((s, f) => s + f.carb, 0) * 10) / 10;
+
+  const hour = mealType === 'breakfast' ? randInt(7, 9) : mealType === 'lunch' ? randInt(11, 13) : mealType === 'dinner' ? randInt(17, 20) : randInt(14, 16);
+  const min = randInt(0, 59);
+  const time = String(hour).padStart(2, '0') + ':' + String(min).padStart(2, '0');
+
+  return {
+    mealType,
+    foods: allFoods,
+    nutrition: { cal: totalCal, pro: totalPro, fat: totalFat, carb: totalCarb },
+    model: 'Qwen3-VL-30B-A3B-Instruct',
+    time,
+  };
+}
+
+function getFoodBase(name) {
+  const FOODS = {
+    豆浆: [31, 3, 1.6, 1.2, '饮品'], 油条: [388, 6.9, 17.6, 51, '油炸'], 鸡蛋: [144, 13.3, 8.8, 2.8, '蛋类'], 包子: [227, 9.6, 10, 27, '面点'],
+    馒头: [223, 7, 1.1, 44, '面点'], 小米粥: [46, 1.4, 0.7, 8.4, '粥品'], 牛奶: [54, 3, 3.2, 3.4, '饮品'],
+    全麦面包: [246, 10.6, 3.4, 47, '烘焙'], 煎饼果子: [260, 8.5, 12, 32, '小吃'], 豆腐脑: [47, 3.8, 1.9, 3.5, '豆制品'], 燕麦粥: [68, 2.4, 1.4, 12, '粥品'],
+    肠粉: [110, 3.8, 3.2, 17, '小吃'], 小笼包: [210, 9.5, 11, 20, '面点'], 馄饨: [178, 7.8, 8.5, 19, '面点'],
+    米饭: [116, 2.6, 0.3, 25.9, '主食'], 面条: [110, 3.5, 1.1, 22, '主食'],
+    红烧肉: [395, 7.2, 37, 4.9, '荤菜'], 宫保鸡丁: [185, 16.7, 10.4, 7.8, '荤菜'], 糖醋排骨: [310, 16.5, 25, 6, '荤菜'],
+    清蒸鱼: [102, 18, 3.5, 0, '荤菜'], 回锅肉: [320, 13, 28, 4, '荤菜'], 红烧牛肉: [190, 20, 11, 3, '荤菜'],
+    可乐鸡翅: [210, 16, 14, 6, '荤菜'], 水煮鱼: [158, 17, 9.5, 2, '荤菜'], 鱼香肉丝: [165, 12, 10, 8, '荤菜'],
+    麻婆豆腐: [120, 7.5, 8, 5.5, '豆制品'], 葱爆羊肉: [195, 18, 13, 3, '荤菜'], 蒜蓉虾: [99, 18.6, 1.8, 2.5, '海鲜'],
+    红烧鸡块: [175, 20, 9.5, 4, '荤菜'], 番茄牛腩: [145, 15, 7, 6, '荤菜'], 青椒肉丝: [140, 11, 8.5, 5, '荤菜'],
+    炒青菜: [50, 2.5, 3, 3.5, '蔬菜'], 番茄炒蛋: [85, 4.5, 5.5, 4.5, '蔬菜'], 地三鲜: [130, 3, 7.5, 13, '蔬菜'],
+    干煸四季豆: [85, 3, 5.5, 7, '蔬菜'], 蒜蓉西兰花: [45, 3.5, 2.5, 2.8, '蔬菜'], 醋溜白菜: [38, 1.5, 2, 3.5, '蔬菜'],
+    凉拌黄瓜: [25, 0.8, 1.8, 2.5, '蔬菜'], 清炒豆芽: [42, 3.2, 1.5, 4.5, '蔬菜'], 香菇青菜: [48, 3, 2, 5, '蔬菜'],
+    紫菜蛋花汤: [32, 2.5, 1.5, 2, '汤品'], 番茄蛋汤: [35, 2.8, 1.8, 2.5, '汤品'], 排骨汤: [85, 6, 6.5, 1, '汤品'],
+    奶茶: [65, 2.2, 2.5, 9, '饮品'], 水果拼盘: [55, 0.6, 0.2, 13, '水果'], 坚果: [607, 20, 53, 20, '零食'],
+    酸奶: [72, 2.5, 2.7, 9.3, '乳制品'], 咖啡: [31, 2, 1.8, 2, '饮品'], 苹果: [52, 0.3, 0.2, 14, '水果'],
+    香蕉: [91, 1.4, 0.4, 21, '水果'], 橙子: [47, 0.8, 0.2, 11, '水果'], 饼干: [433, 8, 14, 70, '零食'],
+    蛋糕: [347, 5.3, 16, 50, '烘焙'], 冰淇淋: [207, 2.9, 13, 24, '甜品'],
+  };
+  return FOODS[name] || [150, 5, 5, 15, '其他'];
+}
+
+// ===== 生成体重数据（30天递减趋势） =====
+function generateWeightLog(dates) {
+  const log = [];
+  let w = 78.0;
+  // 前15天波动下降，后15天加速下降
+  for (let i = 0; i < dates.length; i++) {
+    // 模拟每日波动 + 整体下降趋势
+    const trend = -(i / dates.length) * 2.8; // 30天体重大约下降2.8kg
+    const dailyFluctuation = (Math.random() - 0.4) * 0.6; // 日常波动-0.3到+0.3
+    const weekendEffect = [0, 6].includes(new Date(dates[i]).getDay()) ? 0.3 : 0; // 周末重一点
+    const cheatEffect = [6, 13, 20, 27].includes(i) ? 0.5 : 0; // 欺骗日后体重反弹
+    const missingEffect = [0, 16, 24].includes(i) ? 0 : 0; // 无记录日没体重
+
+    w = Math.round((78.0 + trend + dailyFluctuation + weekendEffect + cheatEffect) * 10) / 10;
+    w = Math.max(74.5, Math.min(78.5, w));
+
+    // 有几个无记录日不称体重
+    if (![0, 16, 24].includes(i)) {
+      log.push({ date: dates[i], weight: w });
+    } else if (i > 0) {
+      // 前一天加近似体重
+      log.push({ date: dates[i], weight: Math.round((log[log.length-1].weight + 0.1) * 10) / 10 });
+    }
+  }
+  return log;
+}
+
+// ===== 生成游戏数据 =====
+function generateGameData(dates, meals) {
+  let totalScore = 0;
+  const history = [];
+  let totalMeals = 0;
+  let streak = 0;
+
+  const mealDates = Object.keys(meals).sort();
+  mealDates.forEach((date, idx) => {
+    const dayMeals = meals[date] || [];
+    totalMeals += dayMeals.length;
+    const dayCal = dayMeals.reduce((s, m) => s + m.nutrition.cal, 0);
+    if (dayCal < 50) return;
+
+    let score = 10;
+    if (dayCal >= 1640 && dayCal <= 2255) score += 20; // 80%-110% of 2050 target
+    const mealTypes = new Set(dayMeals.map(m => m.mealType));
+    if (mealTypes.size >= 3) score += 15;
+    const hasVeggie = dayMeals.some(m => m.foods.some(f => (f.category || '').includes('蔬菜') || /菜/.test(f.name)));
+    if (hasVeggie) score += 5;
+
+    // Streak check
+    if (idx > 0) {
+      const prevDate = mealDates[idx - 1];
+      const expectedPrev = new Date(date);
+      expectedPrev.setDate(expectedPrev.getDate() - 1);
+      if (prevDate === expectedPrev.toISOString().split('T')[0]) {
+        streak++;
+      } else {
+        streak = 1;
+      }
+    } else {
+      streak = 1;
+    }
+    if (streak > 0 && streak % 7 === 0) score += 50;
+
+    totalScore += score;
+    history.push({ date, score, streak });
+  });
+
+  return {
+    totalScore,
+    totalMeals,
+    history,
+    streaks: [3, 7, 14, 21],
+    achievements: ['first_log', 'streak_7', 'meals_100', 'veggie_70', 'streak_14'],
+    veggiePct: 72,
+    proCompliance: 88,
+  };
+}
+
+// ===== 主注入函数 =====
+async function injectAll() {
+  document.getElementById('log').textContent = '';
+  log('🔴 开始注入展示数据...\n');
+
+  // Step 1: 创建账户
+  const pwHash = await hashPassword(PWD);
+  const accounts = { [PHONE]: { phone: PHONE, passwordHash: pwHash, displayName: '小明', createdAt: new Date().toISOString() } };
+  localStorage.setItem('ssyp_accounts', JSON.stringify(accounts));
+  log('✅ 创建演示账户: ' + PHONE + ' / 密码: ' + PWD);
+
+  // Step 2: 设置当前用户
+  localStorage.setItem('ssyp_current_user', PHONE);
+
+  // Step 3: 生成30天日期
+  const dates = getDates(30);
+  const prefix = PHONE + '_';
+
+  // Step 4: 注入Profile
+  const profile = {
+    userID: PHONE,
+    gender: 'male',
+    age: 28,
+    height: 175,
+    weight: 75.2,
+    targetWeight: 72,
+    activity: '1.375',
+    preferences: '偏好清淡, 少油少盐, 多蔬菜',
+  };
+  localStorage.setItem(prefix + 'ssyp_profile', JSON.stringify(profile));
+  log('✅ 健康档案: 男, 28岁, 175cm, 75.2kg → 目标72kg');
+
+  // Step 5: 注入API配置（全局统一，不跟账户）
+  localStorage.setItem('ssyp_api_base', 'https://aiping.cn/api/v1');
+  localStorage.setItem('ssyp_api_key', 'QC-9f8cb4de05fea4afb0e86a79f8a1b78c-4e15149f664ccf9e1c4004d69445a703');
+  localStorage.setItem('ssyp_model', 'Qwen3-VL-30B-A3B-Instruct');
+  log('✅ API配置已预设（全局共享）');
+
+  // Step 6: 生成并注入30天饮食数据
+  const meals = generateMeals(dates);
+  localStorage.setItem(prefix + 'ssyp_meals', JSON.stringify(meals));
+  const mealDates = Object.keys(meals).sort();
+  const totalMeals = mealDates.reduce((s, d) => s + meals[d].length, 0);
+  log('✅ 饮食数据: ' + mealDates.length + '天, 共' + totalMeals + '餐');
+
+  // Step 7: 生成并注入体重数据
+  const weightLog = generateWeightLog(dates);
+  localStorage.setItem(prefix + 'ssyp_weight_log', JSON.stringify(weightLog));
+  log('✅ 体重记录: ' + weightLog.length + '条 (' + weightLog[weightLog.length-1].weight + 'kg → ' + weightLog[0].weight + 'kg)');
+
+  // Step 8: 注入游戏数据
+  const gameData = generateGameData(dates, meals);
+  localStorage.setItem(prefix + 'ssyp_game', JSON.stringify(gameData));
+  log('✅ 游戏数据: ' + gameData.totalScore + '分, Lv' + (Math.floor(gameData.totalScore/500)+1) + ', ' + gameData.achievements.length + '个成就');
+
+  // Step 9: 暗色模式
+  localStorage.setItem('ssyp_dark', '0');
+  log('✅ 设置为浅色模式（P5主题默认黑色背景）');
+
+  log('\n🎉 全部完成！共注入 ' + mealDates.length + ' 天数据');
+  log('📱 演示账号: ' + PHONE + ' | 密码: ' + PWD);
+  log('⏳ 3秒后跳转到应用...');
+
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 3000);
+}
+
+function clearAll() {
+  Object.keys(localStorage).forEach(k => {
+    if (k.includes('ssyp') || k.includes(PHONE)) localStorage.removeItem(k);
+  });
+  document.getElementById('log').textContent = '🗑 相关数据已清除。刷新应用即可。';
+}
+</script>
+</body>
+</html>

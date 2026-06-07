@@ -129,11 +129,8 @@ async function handleRegister() {
 function doLogin(phone, displayName) {
   localStorage.setItem('ssyp_current_user', phone);
 
-  // 初始化账户的API配置（如果还没有的话）
-  if (!localStorage.getItem(phone + '_api_base')) {
-    localStorage.setItem(phone + '_api_base', 'https://aiping.cn/api/v1');
-    localStorage.setItem(phone + '_model', 'Qwen3-VL-30B-A3B-Instruct');
-  }
+  // API 配置全局统一，不初始化 per-account 配置
+  // 直接读取全局配置即可
 
   // 切换到主界面
   $('page-login').classList.remove('active');
@@ -239,6 +236,10 @@ function switchToAccount(phone) {
       if (loginPage) loginPage.classList.remove('active');
       if (cameraPage) cameraPage.classList.add('active');
       if (tabBar) tabBar.style.display = '';
+      // 确保初始化：加载配置 + 刷新当前页面数据
+      if (typeof initAppForCurrentUser === 'function') {
+        setTimeout(initAppForCurrentUser, 100);
+      }
     } else {
       // 未登录
       localStorage.removeItem('ssyp_current_user');
